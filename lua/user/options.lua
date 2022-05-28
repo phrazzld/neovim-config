@@ -1,9 +1,13 @@
-vim.cmd 'syntax enable'
-vim.cmd 'filetype plugin indent on'
-
 local indent = 2
 
 local options = {
+  backup = false,
+  cmdheight = 2,
+  completeopt = { "menuone", "noselect" },
+  pumheight = 10,
+  timeoutlen = 1000,
+  updatetime = 300,
+  writebackup = false,
   hidden = true,
   scrolloff = 8,
   sidescrolloff = 8,

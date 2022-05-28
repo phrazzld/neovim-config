@@ -16,8 +16,8 @@ vim.g.maplocalleader = ' '
 --   command_mode      = "c"
 
 -- buffer navigation
-keymap('n', '<Tab>', ':bnext<CR>', opts)
-keymap('n', '<S-Tab>', ':bprevious<CR>', opts)
+keymap('n', '<S-l>', ':bnext<CR>', opts)
+keymap('n', '<S-h>', ':bprevious<CR>', opts)
 
 -- split pane navigation
 keymap('n', '<C-j>', '<C-w>j', opts)

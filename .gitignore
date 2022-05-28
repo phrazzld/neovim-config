@@ -1,2 +1,4 @@
 .netrwhist
 init.vim.backup
+
+plugin/packer_compiled.lua

@@ -64,8 +64,16 @@ return packer.startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/completion-nvim'
 
-  -- git management
-  use 'tpope/vim-fugitive'
+  -- completions
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'saadparwaiz1/cmp_luasnip'
+
+  -- snippets
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
 
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
