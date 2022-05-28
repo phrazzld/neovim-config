@@ -1,11 +1,7 @@
--- Make spacebar the leader key
 vim.g.mapleader = ' '
 
 local fn = vim.fn
 local execute = vim.api.nvim_command
-
--- sensible defaults
-require('settings')
 
 -- Auto install packer.nvim if not exists
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
@@ -16,11 +12,7 @@ vim.cmd [[packadd packer.nvim]]
 -- Auto compile when there are changes in plugins.lua
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' 
 
--- keymappings
-require('keymappings')
-
--- plugins
-require('plugins')
-
--- plugin configs
-require('config')
+require 'options'
+require 'keymappings'
+require 'plugins'
+require 'config'
