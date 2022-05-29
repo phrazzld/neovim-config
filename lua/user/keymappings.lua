@@ -34,6 +34,8 @@ keymap("v", "∆", ":m .+1<CR>==", opts)
 keymap("v", "˚", ":m .-2<CR>==", opts)
 keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
+keymap("n", "∆", ":m .+1<CR>==", opts)
+keymap("n", "˚", ":m .-2<CR>==", opts)
 
 -- Telescope
 keymap(
