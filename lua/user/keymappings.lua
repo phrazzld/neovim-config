@@ -54,3 +54,9 @@ keymap("n", "<leader>m", ":Format<CR>", opts)
 -- hop
 keymap("n", "<leader>o", ":HopWord<CR>", opts)
 keymap("n", "<leader>l", ":HopLine<CR>", opts)
+
+-- git
+keymap("n", "<C-g>s", ":Git status<CR>", opts)
+keymap("n", "<C-g>a", ":Git add -p .<CR>", opts)
+keymap("n", "<C-g>c", ":Git commit<CR>", opts)
+keymap("n", "<C-g>h", ":Git push<CR>", opts)
