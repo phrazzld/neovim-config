@@ -1,6 +1,5 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 -- Make space the leader key
 keymap("", "<Space>", "<Nop>", opts)
