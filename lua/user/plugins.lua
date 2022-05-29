@@ -87,6 +87,10 @@ return packer.startup(function(use)
 
   use "windwp/nvim-autopairs"
 
+  -- easy comments
+  use "numToStr/Comment.nvim"
+  use "JoosepAlviste/nvim-ts-context-commentstring"
+
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
   if PACKER_BOOTSTRAP then
