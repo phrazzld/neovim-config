@@ -19,13 +19,14 @@ local options = {
   expandtab = true,
   smartindent = true,
   shiftwidth = indent,
-  softtabstop = indent,
   tabstop = indent,
   swapfile = false,
   number = true,
   relativenumber = true,
   wrap = false,
   cursorline = true,
+  showmode = false,
+  signcolumn = "yes",
 }
 
 for k, v in pairs(options) do
