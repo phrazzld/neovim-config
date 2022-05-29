@@ -18,6 +18,7 @@ local options = {
   hlsearch = false,
   expandtab = true,
   smartindent = true,
+  autoindent = true,
   shiftwidth = indent,
   softtabstop = indent,
   tabstop = indent,

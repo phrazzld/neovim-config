@@ -85,6 +85,8 @@ return packer.startup(function(use)
   }
   use "p00f/nvim-ts-rainbow" -- colored parens
 
+  use "windwp/nvim-autopairs"
+
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
   if PACKER_BOOTSTRAP then
