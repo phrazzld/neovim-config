@@ -95,6 +95,10 @@ return packer.startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "tpope/vim-fugitive"
 
+  -- file tree
+  use "kyazdani42/nvim-web-devicons"
+  use "kyazdani42/nvim-tree.lua"
+
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
   if PACKER_BOOTSTRAP then

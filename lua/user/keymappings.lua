@@ -26,7 +26,7 @@ keymap('n', '<C-k>', '<C-w>k', opts)
 keymap('n', '<C-l>', '<C-w>l', opts)
 
 -- file tree
-keymap('n', '<leader>e', ':Lex 30<CR>', opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 
 -- move text up and down
 -- ∆ = alt+j
