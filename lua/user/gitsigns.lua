@@ -4,7 +4,7 @@ if not status_ok then
   return
 end
 
-gitsigns.setup {
+gitsigns.setup({
   signs = {
     add = { h1 = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { h1 = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -46,4 +46,4 @@ gitsigns.setup {
   yadm = {
     enable = false,
   },
-}
+})
