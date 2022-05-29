@@ -35,3 +35,10 @@ keymap('v', '∆', ':m .+1<CR>==', opts)
 keymap('v', '˚', ':m .-2<CR>==', opts)
 keymap('x', '∆', ":move '>+1<CR>gv-gv", opts)
 keymap('x', '˚', ":move '<-2<CR>gv-gv", opts)
+
+-- Telescope
+keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>", opts)
+--keymap('n', '<leader>f', "<cmd>Telescope find_files<CR>", opts)
+keymap('n', '<leader>g', '<cmd>Telescope live_grep<CR>', opts)
+--keymap('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
+--keymap('n', '<leader>ft', '<cmd>Telescope git_branches<CR>', opts)

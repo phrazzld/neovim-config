@@ -1,8 +1,8 @@
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
-local colorscheme = "gruvbox-material"
---local colorscheme = "tokyonight"
+--local colorscheme = "gruvbox-material"
+local colorscheme = "tokyonight"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
