@@ -22,6 +22,11 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
   end
 
+  if server.name == "tsserver" then
+    local tsserver_opts = require("user.lsp.settings.tsserver")
+    opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
+  end
+
   --if server.name == "bashls" then
   --  local bashls_opts = require("user.lsp.settings.bashls")
   --  opts = vim.tbl_deep_extend("force", bashls_opts, opts)
