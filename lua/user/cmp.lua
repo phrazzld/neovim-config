@@ -17,6 +17,34 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
+local kind_icons = {
+  Text = "",
+  Method = "", -- 
+  Function = "",
+  Constructor = "",
+  Field = "ﴲ",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "", -- 
+  Color = "",
+  File = "", -- 
+  Reference = "", -- , , 
+  Folder = "", -- 
+  EnumMember = "",
+  Constant = "", -- , , 
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -69,7 +97,11 @@ cmp.setup {
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
+      -- kind icons
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[LSP::Lua]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -78,6 +110,8 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },

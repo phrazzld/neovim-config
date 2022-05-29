@@ -33,7 +33,5 @@ keymap('n', '<leader>e', ':Lex 30<CR>', opts)
 -- ˚ = alt+k
 keymap('v', '∆', ':m .+1<CR>==', opts)
 keymap('v', '˚', ':m .-2<CR>==', opts)
-keymap('x', 'j', ":move '>+1<CR>gv-gv", opts)
-keymap('x', 'k', ":move '<-2<CR>gv-gv", opts)
 keymap('x', '∆', ":move '>+1<CR>gv-gv", opts)
 keymap('x', '˚', ":move '<-2<CR>gv-gv", opts)

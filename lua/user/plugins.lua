@@ -48,8 +48,9 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
 
-  -- colorscheme
+  -- colorschemes
   use 'sainnhe/gruvbox-material'
+  use 'folke/tokyonight.nvim'
 
   -- fuzzy finder
   use {
@@ -60,20 +61,22 @@ return packer.startup(function(use)
   -- lua development
   use 'tjdevries/nlua.nvim'
 
-  -- lsp and completion
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
-
   -- completions
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'saadparwaiz1/cmp_luasnip'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
 
   -- snippets
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
+
+  -- lsp
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/nvim-lsp-installer'
 
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
