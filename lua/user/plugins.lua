@@ -100,6 +100,12 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
 
+  -- terminal
+  use "akinsho/toggleterm.nvim"
+
+  -- statusline
+  --use "nvim-lualine/lualine.nvim"
+
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
   if PACKER_BOOTSTRAP then
