@@ -17,6 +17,7 @@ vim.g.maplocalleader = " "
 -- buffer navigation
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<C-b>d", ":bdelete<CR>", opts)
 
 -- split pane navigation
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -40,25 +41,25 @@ keymap("n", "˚", ":m .-2<CR>==", opts)
 -- Telescope
 keymap(
   "n",
-  "<leader>f",
+  "<leader>u",
   "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
   opts
 )
 --keymap('n', '<leader>f', "<cmd>Telescope find_files<CR>", opts)
-keymap("n", "<leader>g", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>s", "<cmd>Telescope live_grep<CR>", opts)
 --keymap('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
 --keymap('n', '<leader>ft', '<cmd>Telescope git_branches<CR>', opts)
 
 -- formatting
-keymap("n", "<leader>m", ":Format<CR>", opts)
-keymap("n", "<C-m>i", ":OrganizeImports<CR>", opts)
+keymap("n", "<C-f>f", ":Format<CR>", opts)
+keymap("n", "<C-f>o", ":OrganizeImports<CR>", opts)
 
 -- hop
 keymap("n", "<leader>o", ":HopWord<CR>", opts)
 keymap("n", "<leader>l", ":HopLine<CR>", opts)
 
 -- git
-keymap("n", "<C-g>s", ":Git status<CR>", opts)
-keymap("n", "<C-g>a", ":Git add -p .<CR>", opts)
-keymap("n", "<C-g>c", ":Git commit<CR>", opts)
-keymap("n", "<C-g>h", ":Git push<CR>", opts)
+keymap("n", "<leader>gs", ":Git status<CR>", opts)
+keymap("n", "<leader>ga", ":Git add -p .<CR>", opts)
+keymap("n", "<leader>gc", ":Git commit<CR>", opts)
+keymap("n", "<leader>gh", ":Git push<CR>", opts)
