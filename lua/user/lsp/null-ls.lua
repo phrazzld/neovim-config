@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
+--local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
   debug = false,
@@ -12,7 +12,5 @@ null_ls.setup({
     formatting.prettier,
     formatting.stylua,
     formatting.rustfmt,
-    formatting.rubocop,
-    diagnostics.rubocop,
   },
 })
