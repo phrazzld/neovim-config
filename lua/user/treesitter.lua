@@ -38,7 +38,7 @@ configs.setup {
   },
   indent = { enable = true, disable = { "yaml" } },
   rainbow = {
-    enable = true,
+    enable = false,
     -- disable = { "jsx", "tsx" }, -- list of languages to disable plugin for
     extended_mode = true, -- also highlight non-bracket delimiters like html tags
     max_file_lines = nil, -- do not enable for files with more than n lines, int

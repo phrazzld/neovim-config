@@ -51,6 +51,7 @@ keymap("n", "<leader>g", "<cmd>Telescope live_grep<CR>", opts)
 
 -- formatting
 keymap("n", "<leader>m", ":Format<CR>", opts)
+keymap("n", "<C-m>i", ":OrganizeImports<CR>", opts)
 
 -- hop
 keymap("n", "<leader>o", ":HopWord<CR>", opts)
