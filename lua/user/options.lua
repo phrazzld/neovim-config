@@ -1,5 +1,3 @@
-local indent = 2
-
 local options = {
   backup = false,
   cmdheight = 2,
@@ -17,9 +15,6 @@ local options = {
   incsearch = true,
   hlsearch = false,
   expandtab = true,
-  smartindent = true,
-  shiftwidth = indent,
-  tabstop = indent,
   swapfile = false,
   number = true,
   relativenumber = true,
