@@ -45,7 +45,6 @@ keymap(
   "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
   opts
 )
---keymap('n', '<leader>f', "<cmd>Telescope find_files<CR>", opts)
 keymap("n", "<leader>s", "<cmd>Telescope live_grep<CR>", opts)
 --keymap('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
 --keymap('n', '<leader>ft', '<cmd>Telescope git_branches<CR>', opts)
@@ -62,4 +61,4 @@ keymap("n", "<leader>l", ":HopLine<CR>", opts)
 keymap("n", "<leader>gs", ":Git status<CR>", opts)
 keymap("n", "<leader>ga", ":Git add -p .<CR>", opts)
 keymap("n", "<leader>gc", ":Git commit<CR>", opts)
-keymap("n", "<leader>gh", ":Git push<CR>", opts)
+keymap("n", "<leader>gp", ":Git push<CR>", opts)
