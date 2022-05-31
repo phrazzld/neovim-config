@@ -51,6 +51,12 @@ function _NODE_TOGGLE()
   node:toggle()
 end
 
+local irb = Terminal:new({ cmd = "irb", hidden = true })
+
+function _IRB_TOGGLE()
+  irb:toggle()
+end
+
 local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
 
 function _NCDU_TOGGLE()
