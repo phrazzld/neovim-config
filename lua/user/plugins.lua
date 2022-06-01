@@ -50,7 +50,6 @@ return packer.startup(function(use)
 
   -- colorschemes
   use("sainnhe/gruvbox-material")
-  use("folke/tokyonight.nvim")
 
   -- fuzzy finder
   use({
