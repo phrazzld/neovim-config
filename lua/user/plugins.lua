@@ -115,11 +115,12 @@ return packer.startup(function(use)
   -- show colors in files
   use("norcalli/nvim-colorizer.lua")
 
-  -- rust support
-  use("rust-lang/rust.vim")
-
   -- better indents
   use("tpope/vim-sleuth")
+
+  -- languages
+  use("ray-x/go.nvim")
+  use("rust-lang/rust.vim")
 
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
