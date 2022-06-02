@@ -57,9 +57,6 @@ return packer.startup(function(use)
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
   })
 
-  -- lua development
-  use("tjdevries/nlua.nvim")
-
   -- completions
   use("hrsh7th/nvim-cmp")
   use("hrsh7th/cmp-buffer")
@@ -118,6 +115,7 @@ return packer.startup(function(use)
   use("tpope/vim-sleuth")
 
   -- languages
+  use("tjdevries/nlua.nvim")
   use("ray-x/go.nvim")
   use("rust-lang/rust.vim")
 
@@ -125,6 +123,16 @@ return packer.startup(function(use)
   use("junegunn/goyo.vim")
   use({ "ellisonleao/glow.nvim", branch = "main" })
   use("preservim/vim-markdown")
+
+  -- diagnostics management
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  })
+  use({
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim"
+  })
 
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
