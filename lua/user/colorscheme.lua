@@ -11,9 +11,9 @@ else
   vim.opt.background = "light"
 end
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
-if not status_ok then
+if not ok then
   vim.notify("colorscheme " .. colorscheme .. " not found!")
   return
 end

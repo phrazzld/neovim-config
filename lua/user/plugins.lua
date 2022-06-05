@@ -24,8 +24,8 @@ vim.cmd([[
 ]])
 
 -- use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
+local ok, packer = pcall(require, "packer")
+if not ok then
   print("Protected call to require packer failed")
   return
 end
