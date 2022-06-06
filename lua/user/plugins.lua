@@ -134,6 +134,12 @@ return packer.startup(function(use)
     requires = "nvim-lua/plenary.nvim"
   })
 
+  -- vim sugar for unix shell commands
+  use("tpope/vim-eunuch")
+
+  -- make it easy to add surrounding characters
+  use("tpope/vim-surround")
+
   -- automatically set up config after cloning packer.nvim
   -- keep this at the end of this block, after all the other plugins
   if PACKER_BOOTSTRAP then
