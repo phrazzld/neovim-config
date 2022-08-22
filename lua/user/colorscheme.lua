@@ -4,7 +4,7 @@ local colorscheme = "gruvbox-material"
 
 -- Use dark mode from 1800 - 0700
 local hour = os.date("*t").hour
-
+-- vim.opt.background = "dark"
 if hour > 17 or hour < 7 then
   vim.opt.background = "dark"
 else

@@ -11,19 +11,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- instead of FileType = markdown
 vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*.md",
-  command = "setlocal wrap linebreak nolist cursorline!"
-})
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*.md",
-  command = "nnoremap j gj"
-})
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*.md",
-  command = "nnoremap k gk"
-})
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*.md",
-  command = "Goyo"
+  callback = function()
+    vim.api.nvim_exec(
+      [[
+      nnoremap j gj
+      nnoremap k gk
+      setlocal wrap linebreak nolist cursorline!
+      Goyo
+      ]] ,
+      false
+    )
+  end
 })
 
 -- text files
