@@ -119,6 +119,7 @@ return packer.startup(function(use)
   use("ray-x/go.nvim")
   use("rust-lang/rust.vim")
   use("kchmck/vim-coffee-script")
+  use("slim-template/vim-slim")
 
   -- better markdown editing
   use("junegunn/goyo.vim")
