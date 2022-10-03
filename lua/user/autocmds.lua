@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- NOTE: vim doesn't know *.md files are markdown files
 -- so we have to use VimEnter on the glob pattern
 -- instead of FileType = markdown
+
 vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*.md",
   callback = function()
@@ -17,7 +18,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
       nnoremap j gj
       nnoremap k gk
       setlocal wrap linebreak nolist cursorline!
-      Goyo
+      " Goyo
       ]] ,
       false
     )
