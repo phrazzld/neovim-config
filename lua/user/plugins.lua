@@ -45,7 +45,7 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- Pair programming is best, even with a robot
-  --[[ use("github/copilot.vim") ]]
+  use("github/copilot.vim")
 
   -- common plugin dependencies
   use("nvim-lua/popup.nvim")
