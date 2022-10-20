@@ -44,18 +44,28 @@ return packer.startup(function(use)
   -- packer can manage itself
   use("wbthomason/packer.nvim")
 
+  -- Pair programming is best, even with a robot
+  --[[ use("github/copilot.vim") ]]
+
   -- common plugin dependencies
   use("nvim-lua/popup.nvim")
   use("nvim-lua/plenary.nvim")
 
   -- colorschemes
-  use("sainnhe/gruvbox-material")
+  --[[ use("sainnhe/gruvbox-material") ]]
+  use("folke/tokyonight.nvim")
 
   -- fuzzy finder
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
   })
+
+  -- lsp
+  use("williamboman/mason.nvim")
+  use("williamboman/mason-lspconfig.nvim")
+  use("neovim/nvim-lspconfig")
+  use("jose-elias-alvarez/null-ls.nvim") -- formatting and linting
 
   -- completions
   use("hrsh7th/nvim-cmp")
@@ -69,11 +79,6 @@ return packer.startup(function(use)
   -- snippets
   use("L3MON4D3/LuaSnip")
   use("rafamadriz/friendly-snippets")
-
-  -- lsp
-  use("neovim/nvim-lspconfig")
-  use("williamboman/nvim-lsp-installer")
-  use("jose-elias-alvarez/null-ls.nvim") -- formatting and linting
 
   -- treesitter
   use({
