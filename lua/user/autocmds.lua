@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
       nnoremap j gj
       nnoremap k gk
       setlocal wrap linebreak nolist cursorline!
-      " Goyo
+      Goyo
       ]] ,
       false
     )
@@ -43,4 +43,14 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
+})
+
+-- toggle lualine with Goyo
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoEnter",
+  command = [[lua require'lualine'.hide()]],
+})
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoLeave",
+  command = [[lua require'lualine'.hide({unhide=true})]],
 })

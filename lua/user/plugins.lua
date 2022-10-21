@@ -127,12 +127,6 @@ return packer.startup(function(use)
   use("slim-template/vim-slim")
 
   -- better markdown editing
-  --[[ use({ ]]
-  --[[   "Pocco81/true-zen.nvim", ]]
-  --[[   config = function() ]]
-  --[[            require("true-zen").setup {} ]]
-  --[[   end, ]]
-  --[[ }) ]]
   use("junegunn/goyo.vim")
   use({ "ellisonleao/glow.nvim", branch = "main" })
   use("preservim/vim-markdown")
