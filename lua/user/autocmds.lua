@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- so we have to use VimEnter on the glob pattern
 -- instead of FileType = markdown
 
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "*.md",
   callback = function()
     vim.api.nvim_exec(
@@ -18,8 +18,19 @@ vim.api.nvim_create_autocmd("VimEnter", {
       nnoremap j gj
       nnoremap k gk
       setlocal wrap linebreak nolist cursorline!
+      ]],
+      false
+    )
+  end
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  pattern = "*.md",
+  callback = function()
+    vim.api.nvim_exec(
+      [[
       Goyo
-      ]] ,
+      ]],
       false
     )
   end
