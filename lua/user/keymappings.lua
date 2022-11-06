@@ -40,10 +40,10 @@ keymap("n", "˚", "<CMD>m .-2<CR>==", opts)
 
 -- Telescope
 keymap(
-  "n",
-  "<leader>u",
-  "<CMD>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
-  opts
+	"n",
+	"<leader>u",
+	"<CMD>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
+	opts
 )
 keymap("n", "<leader>s", "<cmd>Telescope live_grep<CR>", opts)
 

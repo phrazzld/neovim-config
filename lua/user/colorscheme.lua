@@ -7,14 +7,14 @@ local colorscheme = "tokyonight"
 local hour = os.date("*t").hour
 -- vim.opt.background = "dark"
 if hour > 17 or hour < 7 then
-  vim.opt.background = "dark"
+	vim.opt.background = "dark"
 else
-  vim.opt.background = "light"
+	vim.opt.background = "light"
 end
 
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 if not ok then
-  vim.notify("colorscheme " .. colorscheme .. " not found!")
-  return
+	vim.notify("colorscheme " .. colorscheme .. " not found!")
+	return
 end
