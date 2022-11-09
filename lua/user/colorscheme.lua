@@ -1,11 +1,10 @@
 vim.opt.termguicolors = true
 
---[[ local colorscheme = "gruvbox-material" ]]
 local colorscheme = "tokyonight"
+--[[ local colorscheme = "gruvbox" ]]
 
 -- Use dark mode from 1800 - 0700
 local hour = os.date("*t").hour
--- vim.opt.background = "dark"
 if hour > 17 or hour < 7 then
 	vim.opt.background = "dark"
 else

@@ -74,6 +74,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua",
+	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua,*.rs",
 	command = [[ :silent! lua vim.lsp.buf.format({ async = false }) ]],
 })

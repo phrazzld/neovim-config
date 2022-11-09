@@ -52,8 +52,9 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	-- colorschemes
-	--[[ use("sainnhe/gruvbox-material") ]]
+	use({ "ellisonleao/gruvbox.nvim" })
 	use("folke/tokyonight.nvim")
+	use({ "projekt0n/github-nvim-theme" })
 
 	-- fuzzy finder
 	use({
