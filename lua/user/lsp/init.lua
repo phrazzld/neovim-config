@@ -33,3 +33,5 @@ require("mason-lspconfig").setup_handlers({
 
 require("user.lsp.null-ls")
 require("lspconfig").rust_analyzer.setup({})
+
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { noremap = true, silent = true })
