@@ -69,11 +69,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	        lua vim.lsp.buf.execute_command({
 		        command = "_typescript.organizeImports",
 		        arguments = { vim.api.nvim_buf_get_name(0) }
-	        })
+	        });
         ]],
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua,*.rs",
-	command = [[ :silent! lua vim.lsp.buf.format({ async = false }) ]],
+	command = [[ :silent! lua vim.lsp.buf.format({ async = true }) ]],
 })
