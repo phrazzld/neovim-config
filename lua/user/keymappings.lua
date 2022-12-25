@@ -48,7 +48,7 @@ keymap(
 keymap("n", "<leader>s", "<cmd>Telescope live_grep<CR>", opts)
 
 -- formatting
-keymap("n", "<C-f>f", "<CMD>Format<CR>", opts)
+keymap("n", "<C-f>f", "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", opts)
 keymap("n", "<C-f>o", "<CMD>OrganizeImports<CR>", opts)
 
 -- hop
