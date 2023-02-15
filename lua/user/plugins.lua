@@ -52,9 +52,15 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim")
 
 	-- colorschemes
-	use({ "ellisonleao/gruvbox.nvim" })
+	--use({ "ellisonleao/gruvbox.nvim" })
 	use("folke/tokyonight.nvim")
-	use({ "projekt0n/github-nvim-theme" })
+	--use({
+	--	"projekt0n/github-nvim-theme",
+	--	tag = 'v0.0.7',
+	--	config = function()
+	--		require("github-theme").setup()
+	--	end,
+	--})
 
 	-- fuzzy finder
 	use({
@@ -82,11 +88,14 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets")
 
 	-- treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use("p00f/nvim-ts-rainbow") -- colored parens
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			ts_update()
+		end,
+	}
+	 use("p00f/nvim-ts-rainbow") -- colored parens
 
 	use("windwp/nvim-autopairs")
 
@@ -122,7 +131,7 @@ return packer.startup(function(use)
 
 	-- languages
 	use("tjdevries/nlua.nvim")
-	use("ray-x/go.nvim")
+	--use("ray-x/go.nvim")
 	use("rust-lang/rust.vim")
 	use("kchmck/vim-coffee-script")
 	use("slim-template/vim-slim")

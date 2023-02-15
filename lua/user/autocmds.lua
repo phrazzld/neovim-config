@@ -1,8 +1,8 @@
 -- format go code before save
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.go",
-	command = [[ :silent! lua require('go.format').gofmt() ]],
-})
+--vim.api.nvim_create_autocmd("BufWritePre", {
+--	pattern = "*.go",
+--	command = [[ :silent! lua require('go.format').gofmt() ]],
+--})
 
 -- better formatting for text editing
 -- markdown files
@@ -46,10 +46,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- remove trailing whitespace
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = { "*" },
-	command = [[%s/\s\+$//e]],
-})
+--vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--	pattern = { "*" },
+--	command = [[%s/\s\+$//e]],
+--})
 
 -- toggle lualine with Goyo
 vim.api.nvim_create_autocmd("User", {

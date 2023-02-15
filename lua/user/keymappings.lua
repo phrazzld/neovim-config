@@ -68,3 +68,4 @@ keymap("n", "<leader>xt", "<CMD>TodoTrouble<CR>", opts)
 -- copilot
 vim.g.copilot_no_tab_map = true
 keymap("i", "<leader>cc", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+keymap("i", "<leader><leader>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

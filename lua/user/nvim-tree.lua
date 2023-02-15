@@ -40,12 +40,6 @@ nvim_tree.setup({
 	},
 	disable_netrw = true,
 	hijack_netrw = true,
-	open_on_setup = false,
-	ignore_ft_on_setup = {
-		"startify",
-		"dashboard",
-		"alpha",
-	},
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = true,
@@ -53,10 +47,6 @@ nvim_tree.setup({
 		enable = true,
 		auto_open = true,
 	},
-	--[[ update_to_buf_dir = { ]]
-	--[[   enable = true, ]]
-	--[[   auto_open = true, ]]
-	--[[ }, ]]
 	diagnostics = {
 		enable = true,
 		icons = {
