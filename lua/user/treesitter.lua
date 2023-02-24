@@ -10,8 +10,8 @@ configs.setup({
 		"comment",
 		"css",
 		"dockerfile",
-		--[[ "gitcommit", ]]
-		--[[ "gitignore", ]]
+		"gitcommit",
+		"gitignore",
 		"go",
 		"html",
 		"javascript",
@@ -22,6 +22,7 @@ configs.setup({
 		"ruby",
 		"rust",
 		"scss",
+		"svelte",
 		"toml",
 		"typescript",
 		"tsx",
