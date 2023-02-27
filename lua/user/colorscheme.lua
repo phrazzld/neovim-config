@@ -2,9 +2,9 @@ vim.opt.termguicolors = true
 
 local colorscheme
 
--- Use dark mode from 1700 - 0800
+-- Use dark mode from 1800 - 0700
 local hour = os.date("*t").hour
-if hour >= 17 or hour <= 7 then
+if hour >= 18 or hour <= 6 then
 	--colorscheme = "tokyonight"
 	vim.opt.background = "dark"
 else
