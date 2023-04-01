@@ -4,7 +4,7 @@ local colorscheme
 
 -- Use dark mode from 1800 - 0700
 local hour = os.date("*t").hour
-if hour >= 18 or hour <= 6 then
+if hour >= 19 or hour <= 6 then
 	--colorscheme = "tokyonight"
 	vim.opt.background = "dark"
 else
