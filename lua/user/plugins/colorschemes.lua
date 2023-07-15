@@ -4,4 +4,8 @@ return function(use)
     use({ "catppuccin/nvim", as = "catppuccin" })
     use("rebelot/kanagawa.nvim")
     use("tiagovla/tokyodark.nvim")
+    use("EdenEast/nightfox.nvim")
+    use("projekt0n/github-nvim-theme")
+    use("sainnhe/everforest")
+    use("junegunn/seoul256.vim")
 end

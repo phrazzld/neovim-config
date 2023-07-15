@@ -20,6 +20,15 @@ local light_colorschemes = {
 	"shine",
 	"wildcharm",
 	"zellner",
+	"dayfox",
+	"dawnfox",
+	"github_light",
+	"github_light_colorblind",
+	"github_light_default",
+	"github_light_high_contrast",
+	"github_light_tritanopia",
+	"everforest",
+	"seoul256-light",
 }
 
 local dark_colorschemes = {
@@ -50,6 +59,20 @@ local dark_colorschemes = {
 	"torte",
 	"wildcharm",
 	"zaibatsu",
+	"nightfox",
+	"duskfox",
+	"nordfox",
+	"terafox",
+	"carbonfox",
+	"github_dark",
+	"github_dark_colorblind",
+	"github_dark_default",
+	"github_dark_dimmed",
+	"github_dark_high_contrast",
+	"github_dark_tritanopia",
+	"github_dimmed",
+	"everforest",
+	"seoul256",
 }
 
 -- Function to choose a random colorscheme
@@ -68,14 +91,18 @@ end
 
 if is_daytime() then
 	colorscheme = choose_random_colorscheme(light_colorschemes)
-	vim.opt.background = "light"
 else
 	colorscheme = choose_random_colorscheme(dark_colorschemes)
-	vim.opt.background = "dark"
 end
 
 -- Apply the colorscheme
 local ok, err = pcall(vim.cmd, "colorscheme " .. colorscheme)
+
+if is_daytime() then
+	vim.opt.background = "light"
+else
+	vim.opt.background = "dark"
+end
 
 if not ok then
 	vim.notify("Failed to load the colorscheme '" .. colorscheme .. "'. Error: " .. err)
