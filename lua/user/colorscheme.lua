@@ -24,11 +24,11 @@ local light_colorschemes = {
 	"dawnfox",
 	"github_light",
 	"github_light_colorblind",
-	"github_light_default",
 	"github_light_high_contrast",
 	"github_light_tritanopia",
 	"everforest",
 	"seoul256-light",
+	"oxocarbon",
 }
 
 local dark_colorschemes = {
@@ -73,6 +73,7 @@ local dark_colorschemes = {
 	"github_dimmed",
 	"everforest",
 	"seoul256",
+	"oxocarbon",
 }
 
 -- Function to choose a random colorscheme

@@ -8,4 +8,5 @@ return function(use)
     use("projekt0n/github-nvim-theme")
     use("sainnhe/everforest")
     use("junegunn/seoul256.vim")
+    use("nyoom-engineering/oxocarbon.nvim")
 end

@@ -6,7 +6,7 @@ end
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer", "tsserver" },
+	ensure_installed = { "rust_analyzer", "tsserver", "lua_ls" },
 })
 
 local opts = {
@@ -23,6 +23,11 @@ require("mason-lspconfig").setup_handlers({
 		local tsserver_opts = require("user.lsp.settings.tsserver")
 		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
 		require("lspconfig").tsserver.setup(opts)
+	end,
+	["lua_ls"] = function()
+		local lua_opts = require("user.lsp.settings.lua_ls")
+		opts = vim.tbl_deep_extend("force", lua_opts, opts)
+		require("lspconfig").lua_ls.setup(opts)
 	end,
 })
 
