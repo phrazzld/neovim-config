@@ -68,7 +68,7 @@ lualine.setup({
 		theme = "OceanicNext",
 		component_separators = { left = '', right = '' },
 		section_separators = { left = '', right = '' },
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+		disabled_filetypes = { "alpha", "dashboard", "Outline" },
 		always_divide_middle = false,
 	},
 	sections = {
@@ -88,5 +88,5 @@ lualine.setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	extensions = {},
+	extensions = {'fugitive', 'nvim-tree', 'toggleterm', 'trouble'},
 })
