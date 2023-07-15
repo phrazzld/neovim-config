@@ -31,12 +31,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
--- change the colorscheme to catppuccin when entering markdown files
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.md",
-	command = [[ colorscheme catppuccino ]],
-})
-
 -- text files
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "text",
