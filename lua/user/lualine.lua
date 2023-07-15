@@ -11,30 +11,24 @@ local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
-	colored = false,
+	symbols = { error = " ", warn = " ", info = " ", hint = " " },
+	colored = true,
 	update_in_insert = false,
-	always_visible = true,
+	always_visible = false,
 }
 
 local diff = {
 	"diff",
-	colored = false,
+	colored = true,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
 }
 
-local mode = {
-	"mode",
-	fmt = function(str)
-		return "-- " .. str .. " --"
-	end,
-}
-
 local filetype = {
 	"filetype",
-	icons_enabled = false,
-	icon = nil,
+	colored = true,
+	icon_only = false,
+	icon = { align = 'right' },
 }
 
 local branch = {
@@ -48,6 +42,14 @@ local location = {
 	padding = 0,
 }
 
+local filename = {
+	"filename",
+	file_status = true,
+	path = 1,
+	cond = hide_in_width,
+	shorting_target = 40,
+}
+
 -- cool function for progress
 local progress = function()
 	local current_line = vim.fn.line(".")
@@ -58,26 +60,24 @@ local progress = function()
 	return chars[index]
 end
 
-local spaces = function()
-	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-end
-
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "OceanicNext",
-		component_separators = { left = '', right = '' },
-		section_separators = { left = '', right = '' },
+		theme = "PaperColor",
+		--[[ component_separators = { left = "", right = "" }, ]]
+		--[[ section_separators = { left = "", right = "" }, ]]
+		component_separators = { left = "|", right = "|" },
+		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "alpha", "dashboard", "Outline" },
 		always_divide_middle = false,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
-		lualine_b = { mode },
-		lualine_c = { { "filename", path = 1 } },
-		lualine_x = { diff, spaces, "encoding", filetype },
-		lualine_y = { location },
-		lualine_z = { progress },
+		lualine_a = { "mode" },
+		lualine_b = { filename },
+		lualine_c = { branch },
+		lualine_x = { diff, "encoding", filetype },
+		lualine_y = { diagnostics },
+		lualine_z = { location, progress },
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -87,6 +87,8 @@ lualine.setup({
 		lualine_y = {},
 		lualine_z = {},
 	},
-	tabline = {},
-	extensions = {'fugitive', 'nvim-tree', 'toggleterm', 'trouble'},
+	tabline = {
+		lualine_a = { 'buffers' }
+	},
+	extensions = { "fugitive", "nvim-tree", "toggleterm", "trouble" },
 })
