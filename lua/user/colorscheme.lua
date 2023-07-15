@@ -15,6 +15,8 @@ end
 -- colorscheme = "slate"
 -- colorscheme = "gruvbox"
 colorscheme = "tokyonight"
+-- colorscheme = "kanagawa"
+-- colorscheme = "catppuccin"
 local ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 if not ok then

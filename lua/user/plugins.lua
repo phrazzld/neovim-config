@@ -54,6 +54,8 @@ return packer.startup(function(use)
 	-- colorschemes
 	--use({ "ellisonleao/gruvbox.nvim" })
 	use("folke/tokyonight.nvim")
+	use({ "catppuccin/nvim", as = "catppuccin" })
+	use("rebelot/kanagawa.nvim")
 	--use({
 	--	"projekt0n/github-nvim-theme",
 	--	tag = 'v0.0.7',
@@ -73,6 +75,7 @@ return packer.startup(function(use)
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 	use("jose-elias-alvarez/null-ls.nvim") -- formatting and linting
+	use("delphinus/vim-firestore")
 
 	-- completions
 	use("hrsh7th/nvim-cmp")
@@ -88,14 +91,14 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets")
 
 	-- treesitter
-	use {
-		'nvim-treesitter/nvim-treesitter',
+	use({
+		"nvim-treesitter/nvim-treesitter",
 		run = function()
-			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 			ts_update()
 		end,
-	}
-	 use("p00f/nvim-ts-rainbow") -- colored parens
+	})
+	use("p00f/nvim-ts-rainbow") -- colored parens
 
 	use("windwp/nvim-autopairs")
 
