@@ -1,19 +1,24 @@
 local fn = vim.fn
+local packer_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
--- automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer, close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+-- function to install packer if it is not installed already
+local function install_packer_if_needed(path)
+	if fn.empty(fn.glob(path)) > 0 then
+		local packer_repo_url = "https://github.com/wbthomason/packer.nvim"
+		local install_cmd = {"git", "clone", "--depth", "1", packer_repo_url, path}
+
+		local res, code = fn.system(install_cmd)
+		if code ~= 0 then
+			error("Failed to install packer: " .. res)
+		end
+		print("Installing packer, close and reopen Neovim...")
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
 end
+
+-- auto install packer if needed
+local bootstrap = install_packer_if_needed(packer_path)
 
 -- reload neovim whenever plugins.lua is saved
 vim.cmd([[
@@ -51,126 +56,20 @@ return packer.startup(function(use)
 	use("nvim-lua/popup.nvim")
 	use("nvim-lua/plenary.nvim")
 
-	-- colorschemes
-	--use({ "ellisonleao/gruvbox.nvim" })
-	use("folke/tokyonight.nvim")
-	use({ "catppuccin/nvim", as = "catppuccin" })
-	use("rebelot/kanagawa.nvim")
-	--use({
-	--	"projekt0n/github-nvim-theme",
-	--	tag = 'v0.0.7',
-	--	config = function()
-	--		require("github-theme").setup()
-	--	end,
-	--})
-
-	-- fuzzy finder
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
-	})
-
-	-- lsp
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
-	use("neovim/nvim-lspconfig")
-	use("jose-elias-alvarez/null-ls.nvim") -- formatting and linting
-	use("delphinus/vim-firestore")
-
-	-- completions
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("saadparwaiz1/cmp_luasnip")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-
-	-- snippets
-	use("L3MON4D3/LuaSnip")
-	use("rafamadriz/friendly-snippets")
-
-	-- treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
-	})
-	use("p00f/nvim-ts-rainbow") -- colored parens
-
-	use("windwp/nvim-autopairs")
-
-	-- easy comments
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-
-	-- git
-	use("lewis6991/gitsigns.nvim")
-	use("tpope/vim-fugitive")
-
-	-- file tree
-	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
-
-	-- terminal
-	use("akinsho/toggleterm.nvim")
-
-	-- statusline
-	use("nvim-lualine/lualine.nvim")
-
-	-- get around faster within a buffer
-	use({
-		"phaazon/hop.nvim",
-		branch = "v1",
-	})
-
-	-- show colors in files
-	use("norcalli/nvim-colorizer.lua")
-
-	-- better indents
-	use("tpope/vim-sleuth")
-
-	-- languages
-	use("tjdevries/nlua.nvim")
-	--use("ray-x/go.nvim")
-	use("rust-lang/rust.vim")
-	use("kchmck/vim-coffee-script")
-	use("slim-template/vim-slim")
-
-	-- better markdown editing
-	use("junegunn/goyo.vim")
-	use({ "ellisonleao/glow.nvim", branch = "main" })
-	use("preservim/vim-markdown")
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && yarn install",
-		setup = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-	})
-
-	-- diagnostics management
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-	})
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-	})
-
-	-- vim sugar for unix shell commands
-	use("tpope/vim-eunuch")
-
-	-- make it easy to add surrounding characters
-	use("tpope/vim-surround")
+	require("user.plugins.colorschemes")(use)
+	require("user.plugins.lsp")(use)
+	require("user.plugins.completions")(use)
+	require("user.plugins.markdown")(use)
+	require("user.plugins.navigation")(use)
+	require("user.plugins.git")(use)
+	require("user.plugins.snippets")(use)
+	require("user.plugins.languages")(use)
+	require("user.plugins.diagnostics")(use)
+	require("user.plugins.utilities")(use)
 
 	-- automatically set up config after cloning packer.nvim
 	-- keep this at the end of this block, after all the other plugins
-	if PACKER_BOOTSTRAP then
+	if bootstrap then
 		require("packer").sync()
 	end
 end)

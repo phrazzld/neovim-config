@@ -3,7 +3,54 @@ vim.opt.termguicolors = true
 -- Set the seed for the random number generator
 math.randomseed(os.time())
 
-local colorschemes = {"tokyonight", "kanagawa", "catppuccin"}
+local light_colorschemes = {
+	"tokyonight",
+	"tokyonight-day",
+	"kanagawa",
+	"kanagawa-lotus",
+	"catppuccin",
+	"catppuccin-latte",
+	"gruvbox",
+	"default",
+	"lunaperche",
+	"morning",
+	"peachpuff",
+	"quiet",
+	"retrobox",
+	"shine",
+	"wildcharm",
+	"zellner",
+}
+
+local dark_colorschemes = {
+	"tokyonight",
+	"tokyonight-moon",
+	"tokyonight-night",
+	"tokyonight-storm",
+	"kanagawa",
+	"kanagawa-dragon",
+	"kanagawa-wave",
+	"catppuccin",
+	"catppuccin-frappe",
+	"catppuccin-machiatto",
+	"catppuccin-mocha",
+	"gruvbox",
+	"tokyodark",
+	"darkblue",
+	"desert",
+	"evening",
+	"habamax",
+	"lunaperche",
+	"murphy",
+	"quiet",
+	"retrobox",
+	"ron",
+	"slate",
+	"sorbet",
+	"torte",
+	"wildcharm",
+	"zaibatsu",
+}
 
 -- Function to choose a random colorscheme
 local function choose_random_colorscheme(schemes)
@@ -11,7 +58,7 @@ local function choose_random_colorscheme(schemes)
 	return schemes[index]
 end
 
-local colorscheme = choose_random_colorscheme(colorschemes)
+local colorscheme
 
 -- Function to determine whether it's currently day or night
 local function is_daytime()
@@ -20,8 +67,10 @@ local function is_daytime()
 end
 
 if is_daytime() then
+	colorscheme = choose_random_colorscheme(light_colorschemes)
 	vim.opt.background = "light"
 else
+	colorscheme = choose_random_colorscheme(dark_colorschemes)
 	vim.opt.background = "dark"
 end
 
