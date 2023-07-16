@@ -41,7 +41,7 @@ local dark_colorschemes = {
 	"kanagawa-wave",
 	"catppuccin",
 	"catppuccin-frappe",
-	"catppuccin-machiatto",
+	"catppuccin-macchiato",
 	"catppuccin-mocha",
 	"gruvbox",
 	"tokyodark",
@@ -66,7 +66,6 @@ local dark_colorschemes = {
 	"carbonfox",
 	"github_dark",
 	"github_dark_colorblind",
-	"github_dark_default",
 	"github_dark_dimmed",
 	"github_dark_high_contrast",
 	"github_dark_tritanopia",
@@ -86,8 +85,9 @@ local colorscheme
 
 -- Function to determine whether it's currently day or night
 local function is_daytime()
-	local hour = os.date("*t").hour
-	return hour < 19 and hour > 6
+	return false
+	--[[ local hour = os.date("*t").hour ]]
+	--[[ return hour < 19 and hour > 6 ]]
 end
 
 if is_daytime() then

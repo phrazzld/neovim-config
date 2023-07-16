@@ -3,6 +3,8 @@ if not ok then
 	return
 end
 
+require("incline").setup()
+
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
@@ -12,21 +14,21 @@ local diagnostics = {
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
 	symbols = { error = " ", warn = " ", info = " ", hint = " " },
-	colored = true,
+	colored = false,
 	update_in_insert = false,
 	always_visible = false,
 }
 
 local diff = {
 	"diff",
-	colored = true,
+	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
 }
 
 local filetype = {
 	"filetype",
-	colored = true,
+	colored = false,
 	icon_only = false,
 	icon = { align = 'right' },
 }
@@ -73,19 +75,11 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { filename },
-		lualine_c = { branch },
-		lualine_x = { diff, "encoding", filetype },
+		lualine_b = { branch },
+		lualine_c = { diff },
+		lualine_x = { "encoding", filetype },
 		lualine_y = { diagnostics },
 		lualine_z = { location, progress },
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
-		lualine_y = {},
-		lualine_z = {},
 	},
 	tabline = {
 		lualine_a = { 'buffers' }

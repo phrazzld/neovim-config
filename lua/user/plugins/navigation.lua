@@ -11,4 +11,6 @@ return function(use)
 	-- file tree
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
+	-- floating statuslines
+	use("b0o/incline.nvim")
 end
