@@ -3,7 +3,20 @@ if not ok then
 	return
 end
 
-require("incline").setup()
+require("incline").setup({
+	hide = {
+		cursorline = false,
+		focused_win = false,
+		only_win = false,
+	},
+	ignore = {
+		buftypes = "special",
+		filetypes = { "markdown" },
+		floating_wins = true,
+		unlisted_buffers = true,
+		wintypes = "special",
+	},
+})
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
@@ -30,7 +43,7 @@ local filetype = {
 	"filetype",
 	colored = false,
 	icon_only = false,
-	icon = { align = 'right' },
+	icon = { align = "right" },
 }
 
 local branch = {
@@ -52,7 +65,6 @@ local filename = {
 	shorting_target = 40,
 }
 
--- cool function for progress
 local progress = function()
 	local current_line = vim.fn.line(".")
 	local total_lines = vim.fn.line("$")
@@ -62,27 +74,40 @@ local progress = function()
 	return chars[index]
 end
 
+local buffers = {
+	"buffers",
+	show_filename_only = true,
+	hide_filename_extension = false,
+	show_modified_status = true,
+	mode = 0,
+	max_length = vim.o.columns * 2 / 3,
+	filetype_names = {
+		alpha = "α",
+		dashboard = "",
+		Outline = "",
+		markdown = "",
+		fzf = "",
+		packer = "",
+		TelescopePrompt = "",
+	},
+}
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "PaperColor",
-		--[[ component_separators = { left = "", right = "" }, ]]
-		--[[ section_separators = { left = "", right = "" }, ]]
 		component_separators = { left = "|", right = "|" },
 		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "alpha", "dashboard", "Outline" },
+		disabled_filetypes = { "alpha", "dashboard", "Outline", "markdown", "fzf", "packer", "TelescopePrompt" },
 		always_divide_middle = false,
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { branch },
-		lualine_c = { diff },
+		lualine_b = { filename },
+		lualine_c = { branch, diff },
 		lualine_x = { "encoding", filetype },
 		lualine_y = { diagnostics },
 		lualine_z = { location, progress },
-	},
-	tabline = {
-		lualine_a = { 'buffers' }
 	},
 	extensions = { "fugitive", "nvim-tree", "toggleterm", "trouble" },
 })
