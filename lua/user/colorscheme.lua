@@ -13,9 +13,6 @@ local light_colorschemes = {
 	"gruvbox",
 	"default",
 	"lunaperche",
-	"morning",
-	"peachpuff",
-	"quiet",
 	"retrobox",
 	"shine",
 	"wildcharm",
@@ -27,8 +24,8 @@ local light_colorschemes = {
 	"github_light_high_contrast",
 	"github_light_tritanopia",
 	"everforest",
-	"seoul256-light",
 	"oxocarbon",
+	"pink-panic",
 }
 
 local dark_colorschemes = {
@@ -54,7 +51,6 @@ local dark_colorschemes = {
 	"ron",
 	"slate",
 	"sorbet",
-	"torte",
 	"wildcharm",
 	"zaibatsu",
 	"nightfox",
@@ -67,9 +63,7 @@ local dark_colorschemes = {
 	"github_dark_dimmed",
 	"github_dark_high_contrast",
 	"github_dark_tritanopia",
-	"github_dimmed",
 	"everforest",
-	"seoul256",
 	"oxocarbon",
 }
 

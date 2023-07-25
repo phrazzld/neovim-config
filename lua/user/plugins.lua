@@ -5,7 +5,7 @@ local packer_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local function install_packer_if_needed(path)
 	if fn.empty(fn.glob(path)) > 0 then
 		local packer_repo_url = "https://github.com/wbthomason/packer.nvim"
-		local install_cmd = {"git", "clone", "--depth", "1", packer_repo_url, path}
+		local install_cmd = { "git", "clone", "--depth", "1", packer_repo_url, path }
 
 		local res, code = fn.system(install_cmd)
 		if code ~= 0 then

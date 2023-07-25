@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = function()
 		vim.api.nvim_exec(
 			[[
-			        nnoremap j gj
+				nnoremap j gj
 				nnoremap k gk
 				setlocal wrap linebreak nolist cursorline!
 		        ]],
@@ -46,10 +46,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- remove trailing whitespace
---vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---	pattern = { "*" },
---	command = [[%s/\s\+$//e]],
---})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*" },
+	command = [[%s/\s\+$//e]],
+})
 
 -- toggle lualine with Goyo
 vim.api.nvim_create_autocmd("User", {
@@ -62,18 +62,18 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Automatically organize imports and format JS/TS code on save
---vim.api.nvim_create_autocmd("BufWritePre", {
---	pattern = "*.js,*.ts,*.jsx,*.tsx",
---	command = [[
---	        :silent!
---	        lua vim.lsp.buf.execute_command({
---		        command = "_typescript.organizeImports",
---		        arguments = { vim.api.nvim_buf_get_name(0) }
---	        });
---        ]],
---})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.js,*.ts,*.jsx,*.tsx",
+	command = [[
+	        :silent!
+	        lua vim.lsp.buf.execute_command({
+		        command = "_typescript.organizeImports",
+		        arguments = { vim.api.nvim_buf_get_name(0) }
+	        });
+        ]],
+})
 
---vim.api.nvim_create_autocmd("BufWritePre", {
---	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua,*.rs",
---	command = [[ :silent! lua vim.lsp.buf.format({ async = true }) ]],
---})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua,*.rs",
+	command = [[ :silent! lua vim.lsp.buf.format({ async = true }) ]],
+})
