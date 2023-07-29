@@ -9,7 +9,6 @@
 -- NOTE: vim doesn't know *.md files are markdown files
 -- so we have to use VimEnter on the glob pattern
 -- instead of FileType = markdown
-
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = "*.md",
 	callback = function()
@@ -62,18 +61,24 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- Automatically organize imports and format JS/TS code on save
+-- Autocommands for TypeScript and JavaScript files
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.js,*.ts,*.jsx,*.tsx",
-	command = [[
-	        :silent!
-	        lua vim.lsp.buf.execute_command({
-		        command = "_typescript.organizeImports",
-		        arguments = { vim.api.nvim_buf_get_name(0) }
-	        });
-        ]],
+	pattern = "*.ts,*.tsx,*.js,*.jsx",
+	callback = function()
+		vim.cmd("silent!")
+		vim.lsp.buf.execute_command({
+			command = "_typescript.organizeImports",
+			arguments = { vim.api.nvim_buf_get_name(0) },
+		})
+		vim.lsp.buf.format()
+	end,
 })
 
+-- Autocommands for Lua and Rust files
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.js,*.ts,*.jsx,*.tsx,*.lua,*.rs",
-	command = [[ :silent! lua vim.lsp.buf.format({ async = true }) ]],
+	pattern = "*.lua,*.rs",
+	callback = function()
+		vim.cmd("silent!")
+		vim.lsp.buf.format({ async = true })
+	end,
 })
