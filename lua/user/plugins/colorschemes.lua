@@ -10,4 +10,5 @@ return function(use)
 	use("nyoom-engineering/oxocarbon.nvim")
 	use("rktjmp/lush.nvim")
 	use("Scysta/pink-panic.nvim")
+	use("svermeulen/text-to-colorscheme.nvim")
 end

@@ -62,23 +62,22 @@ vim.api.nvim_create_autocmd("User", {
 
 -- Automatically organize imports and format JS/TS code on save
 -- Autocommands for TypeScript and JavaScript files
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.ts,*.tsx,*.js,*.jsx",
-	callback = function()
-		vim.cmd("silent!")
-		vim.lsp.buf.execute_command({
-			command = "_typescript.organizeImports",
-			arguments = { vim.api.nvim_buf_get_name(0) },
-		})
-		vim.lsp.buf.format()
-	end,
-})
+--[[ vim.api.nvim_create_autocmd("BufWritePre", { ]]
+--[[ 	pattern = "*.ts,*.tsx,*.js,*.jsx", ]]
+--[[ 	callback = function() ]]
+--[[ 		vim.cmd("silent!") ]]
+--[[ vim.lsp.buf.execute_command({ ]]
+--[[ 	command = "_typescript.organizeImports", ]]
+--[[ 	arguments = { vim.api.nvim_buf_get_name(0) }, ]]
+--[[ }) ]]
+--[[ 	vim.lsp.buf.format() ]]
+--[[ end, ]]
+--[[ }) ]]
 
 -- Autocommands for Lua and Rust files
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.lua,*.rs",
+	pattern = "*.lua,*.rs,*.ts,*.tsx,*.js,*.jsx,*.svelte",
 	callback = function()
-		vim.cmd("silent!")
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format()
 	end,
 })

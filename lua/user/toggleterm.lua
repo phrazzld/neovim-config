@@ -1,5 +1,6 @@
 local ok, toggleterm = pcall(require, "toggleterm")
 if not ok then
+	vim.notify("failed to load toggleterm")
 	return
 end
 

@@ -5,27 +5,33 @@ if not ok then
 end
 
 configs.setup({
+	auto_install = true,
 	ensure_installed = {
 		"bash",
 		"comment",
 		"css",
+		"diff",
 		"dockerfile",
+		"git_config",
+		"gitattributes",
 		"gitcommit",
 		"gitignore",
-		"go",
+		--[[ "go", ]]
 		"html",
 		"javascript",
+		"jq",
 		"json",
 		"json5",
 		"lua",
+		"python",
 		"regex",
 		"ruby",
 		"rust",
 		"scss",
 		"svelte",
 		"toml",
-		"typescript",
 		"tsx",
+		"typescript",
 		"vim",
 		"yaml",
 	}, -- "all", or a list of languages

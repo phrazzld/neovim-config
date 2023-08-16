@@ -9,19 +9,14 @@ local light_colorschemes = {
 	"kanagawa",
 	"kanagawa-lotus",
 	"catppuccin",
-	"catppuccin-latte",
 	"gruvbox",
-	"default",
-	"lunaperche",
-	"retrobox",
-	"shine",
 	"wildcharm",
 	"dayfox",
-	"dawnfox",
-	"github_light",
-	"github_light_colorblind",
-	"github_light_high_contrast",
-	"github_light_tritanopia",
+	"dawnfox", --
+	"github_light", --
+	"github_light_colorblind", --
+	"github_light_high_contrast", --
+	"github_light_tritanopia", --
 	"everforest",
 	"oxocarbon",
 	"pink-panic",
@@ -40,28 +35,31 @@ local dark_colorschemes = {
 	"catppuccin-macchiato",
 	"catppuccin-mocha",
 	"gruvbox",
-	"darkblue",
 	"habamax",
-	"lunaperche",
 	"quiet",
 	"retrobox",
-	"slate",
-	"sorbet",
 	"wildcharm",
-	"zaibatsu",
 	"nightfox",
 	"duskfox",
-	"nordfox",
-	"terafox",
-	"carbonfox",
-	"github_dark",
-	"github_dark_colorblind",
-	"github_dark_dimmed",
-	"github_dark_high_contrast",
-	"github_dark_tritanopia",
-	"everforest",
-	"oxocarbon",
+	"nordfox", --
+	"terafox", --
+	"carbonfox", --
+	"github_dark", --
+	"github_dark_colorblind", --
+	"github_dark_dimmed", --
+	"github_dark_high_contrast", --
+	"github_dark_tritanopia", --
+	"everforest", --
+	"oxocarbon", --
 }
+
+--vim.opt.background = "dark"
+--
+--require("text-to-colorscheme").setup({
+--	ai = {
+--		openai_api_key = os.getenv("OPENAI_API_KEY"),
+--	},
+--})
 
 -- Function to choose a random colorscheme
 local function choose_random_colorscheme(schemes)
