@@ -69,3 +69,8 @@ keymap("n", "<leader>tt", "<CMD>TodoTrouble<CR>", opts)
 vim.g.copilot_no_tab_map = true
 keymap("i", "<leader>cc", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 keymap("i", "<leader><leader>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+-- typescript tools
+keymap("n", "<leader>to", "<CMD>TSToolsOrganizeImports<CR>", opts)
+keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
+keymap("n", "<leader>td", "<CMD>TSToolsGoToSourceDefinition<CR>", opts)
