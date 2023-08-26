@@ -62,8 +62,8 @@ keymap("n", "<leader>gc", "<CMD>Git commit<CR>", opts)
 keymap("n", "<leader>gp", "<CMD>Git push<CR>", opts)
 
 -- trouble
-keymap("n", "<leader>xx", "<CMD>Trouble<CR>", opts)
-keymap("n", "<leader>xt", "<CMD>TodoTrouble<CR>", opts)
+keymap("n", "<leader>tx", "<CMD>Trouble<CR>", opts)
+keymap("n", "<leader>tt", "<CMD>TodoTrouble<CR>", opts)
 
 -- copilot
 vim.g.copilot_no_tab_map = true

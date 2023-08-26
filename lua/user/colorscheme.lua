@@ -1,74 +1,5 @@
 vim.opt.termguicolors = true
 
--- Set the seed for the random number generator
-math.randomseed(os.time())
-
-local light_colorschemes = {
-	"tokyonight",
-	"tokyonight-day",
-	"kanagawa",
-	"kanagawa-lotus",
-	"catppuccin",
-	"gruvbox",
-	"wildcharm",
-	"dayfox",
-	"dawnfox", --
-	"github_light", --
-	"github_light_colorblind", --
-	"github_light_high_contrast", --
-	"github_light_tritanopia", --
-	"everforest",
-	"oxocarbon",
-	"pink-panic",
-}
-
-local dark_colorschemes = {
-	"tokyonight",
-	"tokyonight-moon",
-	"tokyonight-night",
-	"tokyonight-storm",
-	"kanagawa",
-	"kanagawa-dragon",
-	"kanagawa-wave",
-	"catppuccin",
-	"catppuccin-frappe",
-	"catppuccin-macchiato",
-	"catppuccin-mocha",
-	"gruvbox",
-	"habamax",
-	"quiet",
-	"retrobox",
-	"wildcharm",
-	"nightfox",
-	"duskfox",
-	"nordfox", --
-	"terafox", --
-	"carbonfox", --
-	"github_dark", --
-	"github_dark_colorblind", --
-	"github_dark_dimmed", --
-	"github_dark_high_contrast", --
-	"github_dark_tritanopia", --
-	"everforest", --
-	"oxocarbon", --
-}
-
---vim.opt.background = "dark"
---
---require("text-to-colorscheme").setup({
---	ai = {
---		openai_api_key = os.getenv("OPENAI_API_KEY"),
---	},
---})
-
--- Function to choose a random colorscheme
-local function choose_random_colorscheme(schemes)
-	local index = math.random(#schemes)
-	return schemes[index]
-end
-
-local colorscheme
-
 -- Function to determine whether it's currently day or night
 local function is_daytime()
 	local hour = os.date("*t").hour
@@ -76,20 +7,16 @@ local function is_daytime()
 end
 
 if is_daytime() then
-	colorscheme = choose_random_colorscheme(light_colorschemes)
+	vim.opt.background = "light"
 else
-	colorscheme = choose_random_colorscheme(dark_colorschemes)
+	vim.opt.background = "dark"
 end
+
+local colorscheme = "rose-pine"
 
 local ok, err = pcall(vim.cmd, "colorscheme " .. colorscheme)
 
 if not ok then
 	vim.notify("Failed to load the colorscheme '" .. colorscheme .. "'. Error: " .. err)
 	return
-end
-
-if is_daytime() then
-	vim.opt.background = "light"
-else
-	vim.opt.background = "dark"
 end
