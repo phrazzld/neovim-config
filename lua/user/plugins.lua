@@ -67,6 +67,12 @@ return packer.startup(function(use)
 	require("user.plugins.diagnostics")(use)
 	require("user.plugins.utilities")(use)
 
+	-- random / experimental plugins
+	use({
+		"m4xshen/hardtime.nvim",
+		requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+	})
+
 	-- automatically set up config after cloning packer.nvim
 	-- keep this at the end of this block, after all the other plugins
 	if bootstrap then
