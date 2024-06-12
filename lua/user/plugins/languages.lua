@@ -10,4 +10,6 @@ return function(use)
 			require("typescript-tools").setup({})
 		end,
 	})
+	-- golang
+	use("ray-x/go.nvim")
 end

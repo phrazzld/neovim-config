@@ -64,16 +64,18 @@ keymap("n", "<leader>gp", "<CMD>Git push<CR>", opts)
 -- trouble
 keymap("n", "<leader>tx", "<CMD>Trouble<CR>", opts)
 keymap("n", "<leader>tt", "<CMD>TodoTrouble<CR>", opts)
+keymap("n", "<leader>td", "<CMD>TroubleToggle document_diagnostics<CR>", opts)
+keymap("n", "<leader>tw", "<CMD>TroubleToggle workspace_diagnostics<CR>", opts)
 
 -- copilot
-vim.g.copilot_no_tab_map = true
-keymap("i", "<leader>cc", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-keymap("i", "<leader><leader>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+--[[ vim.g.copilot_no_tab_map = true ]]
+--[[ keymap("i", "<leader>cc", 'copilot#Accept("<CR>")', { silent = true, expr = true }) ]]
+--[[ keymap("i", "<leader><leader>", 'copilot#Accept("<CR>")', { silent = true, expr = true }) ]]
 
 -- typescript tools
 keymap("n", "<leader>to", "<CMD>TSToolsOrganizeImports<CR>", opts)
 keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
-keymap("n", "<leader>td", "<CMD>TSToolsGoToSourceDefinition<CR>", opts)
+--[[ keymap("n", "<leader>td", "<CMD>TSToolsGoToSourceDefinition<CR>", opts) ]]
 
 -- colors
 keymap("n", "<leader>00", "<CMD>set background=dark<CR><CMD>colorscheme rose-pine<CR>", opts)

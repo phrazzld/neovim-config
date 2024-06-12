@@ -6,7 +6,7 @@ end
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer", "tsserver", "lua_ls" },
+	ensure_installed = { "rust_analyzer", "tsserver", "lua_ls", "gopls" },
 })
 
 local opts = {

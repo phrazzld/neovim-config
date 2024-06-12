@@ -49,8 +49,14 @@ return packer.startup(function(use)
 	-- packer can manage itself
 	use("wbthomason/packer.nvim")
 
-	-- Pair programming is best, even with a robot
-	use("github/copilot.vim")
+	-- pair programming is best, even with a robot
+	--[[ use("github/copilot.vim") ]]
+	use({
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({})
+		end,
+	})
 
 	-- common plugin dependencies
 	use("nvim-lua/popup.nvim")

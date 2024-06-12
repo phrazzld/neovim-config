@@ -23,6 +23,22 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	end,
 })
 
+-- disable copilot when in markdown files
+--vim.api.nvim_create_autocmd("BufEnter", {
+--	pattern = "*.md",
+--	callback = function()
+--		vim.api.nvim_exec([[ Copilot disable ]], false)
+--	end,
+--})
+
+-- disable supermaven when in markdown files
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.md",
+	callback = function()
+		vim.api.nvim_exec([[ SupermavenStop ]], false)
+	end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
 	pattern = "*.md",
 	callback = function()
@@ -60,24 +76,33 @@ vim.api.nvim_create_autocmd("User", {
 	command = [[lua require'lualine'.hide({ unhide=true })]],
 })
 
--- Automatically organize imports and format JS/TS code on save
--- Autocommands for TypeScript and JavaScript files
---[[ vim.api.nvim_create_autocmd("BufWritePre", { ]]
---[[ 	pattern = "*.ts,*.tsx,*.js,*.jsx", ]]
---[[ 	callback = function() ]]
---[[ 		vim.cmd("silent!") ]]
---[[ vim.lsp.buf.execute_command({ ]]
---[[ 	command = "_typescript.organizeImports", ]]
---[[ 	arguments = { vim.api.nvim_buf_get_name(0) }, ]]
---[[ }) ]]
---[[ 	vim.lsp.buf.format() ]]
---[[ end, ]]
---[[ }) ]]
-
 -- Autocommands for Lua and Rust files
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.lua,*.rs,*.ts,*.tsx,*.js,*.jsx,*.svelte",
 	callback = function()
 		vim.lsp.buf.format()
+	end,
+})
+
+-- format go code before save
+local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
+	callback = function()
+		require("go.format").goimports()
+	end,
+	group = format_sync_grp,
+})
+
+-- Lua configuration for Go formatting
+vim.api.nvim_create_augroup("Go", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = "Go",
+	pattern = "go",
+	callback = function()
+		vim.opt_local.expandtab = false
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
 	end,
 })

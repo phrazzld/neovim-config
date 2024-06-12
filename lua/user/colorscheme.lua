@@ -45,11 +45,11 @@ local light_colorschemes = {
 	"everforest",
 	"github_light",
 	"kanagawa",
-	"lunaperche",
-	"wildcharm",
+	--[[ "lunaperche", ]]
+	--[[ "wildcharm", ]]
 	"rose-pine",
-	"tokyonight-day",
-	"dayfox",
+	--[[ "tokyonight-day", ]]
+	--[[ "dayfox", ]]
 	"gruvbox",
 }
 local dark_colorschemes = { "rose-pine", "tokyonight", "gruvbox", "kanagawa", "github_dark", "nightfox" }
