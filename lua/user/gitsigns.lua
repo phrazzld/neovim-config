@@ -6,11 +6,12 @@ end
 
 gitsigns.setup({
 	signs = {
-		add = { h1 = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-		change = { h1 = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-		delete = { h1 = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-		topdelete = { h1 = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-		changedelete = { h1 = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+		add = { text = "┃" },
+		change = { text = "┃" },
+		delete = { text = "_" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+		untracked = { text = "┆" },
 	},
 	signcolumn = true, -- toggle with `:Gitsigns toggle_signs`
 	numhl = false, -- toggle with `:Gitsigns toggle_numhl`
@@ -28,9 +29,6 @@ gitsigns.setup({
 		delay = 1000,
 		ignore_whitespace = false,
 	},
-	current_line_blame_formatter_opts = {
-		relative_time = false,
-	},
 	sign_priority = 6,
 	update_debounce = 100,
 	status_formatter = nil, -- use default
@@ -42,8 +40,5 @@ gitsigns.setup({
 		relative = "cursor",
 		row = 0,
 		col = 1,
-	},
-	yadm = {
-		enable = false,
 	},
 })
