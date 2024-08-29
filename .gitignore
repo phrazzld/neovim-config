@@ -3,3 +3,4 @@ init.vim.backup
 plugin/packer_compiled.lua
 .tool-versions
 lua/.luarc.json
+lazy-lock.json

@@ -1,25 +1,23 @@
 -- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out,                            "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--branch=stable",
+		"https://github.com/folke/lazy.nvim.git",
+		lazypath,
+	})
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
--- make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- this is also a good place to set up other settings (vim.opt)
+-- Set up leader keys and other settings before loading lazy.nvim
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+-- Add any other vim options here
+-- vim.opt.example = value
 
 -- set up lazy.nvim
 require("lazy").setup({
@@ -31,6 +29,43 @@ require("lazy").setup({
 				require("supermaven-nvim").setup({})
 			end,
 		},
+		{
+			"yetone/avante.nvim",
+			event = "VeryLazy",
+			opts = {
+				-- add any opts here
+			},
+			dependencies = {
+				"stevearc/dressing.nvim",
+				"nvim-lua/plenary.nvim",
+				"MunifTanjim/nui.nvim",
+				--- The below dependencies are optional,
+				"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+				{
+					-- support for image pasting
+					"HakonHarnes/img-clip.nvim",
+					event = "VeryLazy",
+					opts = {
+						-- recommended settings
+						default = {
+							embed_image_as_base64 = false,
+							prompt_for_file_name = false,
+							drag_and_drop = {
+								insert_mode = true,
+							},
+						},
+					},
+				},
+				{
+					-- Make sure to setup it properly if you have lazy=true
+					"MeanderingProgrammer/render-markdown.nvim",
+					opts = {
+						file_types = { "markdown", "Avante" },
+					},
+					ft = { "markdown", "Avante" },
+				},
+			},
+		},
 
 		-- common dependencies
 		{ "nvim-lua/popup.nvim" },
@@ -39,13 +74,13 @@ require("lazy").setup({
 		-- colorschemes
 		{ "ellisonleao/gruvbox.nvim" },
 		{ "folke/tokyonight.nvim" },
-		{ "catppuccin/nvim",                  name = "catppuccin" },
+		{ "catppuccin/nvim", name = "catppuccin" },
 		{ "rebelot/kanagawa.nvim" },
 		{ "EdenEast/nightfox.nvim" },
 		{ "projekt0n/github-nvim-theme" },
 		{ "sainnhe/everforest" },
 		{ "nyoom-engineering/oxocarbon.nvim" },
-		{ "rose-pine/neovim",                 name = "rose-pine" },
+		{ "rose-pine/neovim", name = "rose-pine" },
 
 		-- lsp stuff
 		{ "williamboman/mason.nvim" },
@@ -73,11 +108,11 @@ require("lazy").setup({
 		},
 		-- get around faster within a buffer
 		{
-			'smoka7/hop.nvim',
+			"smoka7/hop.nvim",
 			version = "*",
 			opts = {
-				keys = 'etovxqpdygfblzhckisuran'
-			}
+				keys = "etovxqpdygfblzhckisuran",
+			},
 		},
 		-- file tree
 		{ "kyazdani42/nvim-web-devicons" },
