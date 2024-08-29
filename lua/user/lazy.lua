@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
+			{ out,                            "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -39,13 +39,13 @@ require("lazy").setup({
 		-- colorschemes
 		{ "ellisonleao/gruvbox.nvim" },
 		{ "folke/tokyonight.nvim" },
-		{ "catppuccin/nvim", name = "catppuccin" },
+		{ "catppuccin/nvim",                  name = "catppuccin" },
 		{ "rebelot/kanagawa.nvim" },
 		{ "EdenEast/nightfox.nvim" },
 		{ "projekt0n/github-nvim-theme" },
 		{ "sainnhe/everforest" },
 		{ "nyoom-engineering/oxocarbon.nvim" },
-		{ "rose-pine/neovim", name = "rose-pine" },
+		{ "rose-pine/neovim",                 name = "rose-pine" },
 
 		-- lsp stuff
 		{ "williamboman/mason.nvim" },
@@ -59,7 +59,6 @@ require("lazy").setup({
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
 		{ "hrsh7th/cmp-cmdline" },
-		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-nvim-lua" },
 
@@ -74,8 +73,11 @@ require("lazy").setup({
 		},
 		-- get around faster within a buffer
 		{
-			"phaazon/hop.nvim",
-			branch = "v1",
+			'smoka7/hop.nvim',
+			version = "*",
+			opts = {
+				keys = 'etovxqpdygfblzhckisuran'
+			}
 		},
 		-- file tree
 		{ "kyazdani42/nvim-web-devicons" },

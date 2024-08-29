@@ -1,9 +1,3 @@
--- format go code before save
---vim.api.nvim_create_autocmd("BufWritePre", {
---	pattern = "*.go",
---	command = [[ :silent! lua require('go.format').gofmt() ]],
---})
-
 -- better formatting for text editing
 -- markdown files
 -- NOTE: vim doesn't know *.md files are markdown files
