@@ -23,14 +23,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	end,
 })
 
--- disable copilot when in markdown files
---vim.api.nvim_create_autocmd("BufEnter", {
---	pattern = "*.md",
---	callback = function()
---		vim.api.nvim_exec([[ Copilot disable ]], false)
---	end,
---})
-
 -- disable supermaven when in markdown files
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*.md",

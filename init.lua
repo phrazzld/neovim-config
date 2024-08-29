@@ -1,6 +1,6 @@
+require("user.lazy")
 require("user.options")
 require("user.keymappings")
-require("user.plugins")
 require("go").setup()
 require("user.colorscheme")
 require("user.cmp")

@@ -136,13 +136,6 @@ local schemas = {
 		},
 	},
 	{
-		description = "Packer template JSON configuration",
-		fileMatch = {
-			"packer.json",
-		},
-		url = "https://json.schemastore.org/packer.json",
-	},
-	{
 		description = "NPM configuration file",
 		fileMatch = {
 			"package.json",
