@@ -6,7 +6,12 @@ end
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "rust_analyzer", "tsserver", "lua_ls", "gopls" },
+	ensure_installed = {
+		"rust_analyzer",
+		"ts_ls",
+		"lua_ls",
+		"gopls",
+	},
 })
 
 local opts = {
@@ -19,10 +24,10 @@ require("mason-lspconfig").setup_handlers({
 		require("lspconfig")[server_name].setup(opts)
 	end,
 	-- Targeted overrides
-	["tsserver"] = function()
-		local tsserver_opts = require("user.lsp.settings.tsserver")
-		opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
-		require("lspconfig").tsserver.setup(opts)
+	["ts_ls"] = function()
+		local ts_ls_opts = require("user.lsp.settings.ts_ls")
+		opts = vim.tbl_deep_extend("force", ts_ls_opts, opts)
+		require("lspconfig").ts_ls.setup(opts)
 	end,
 	["lua_ls"] = function()
 		local lua_opts = require("user.lsp.settings.lua_ls")
