@@ -3,41 +3,20 @@ vim.opt.termguicolors = true
 -- Seed the random generator
 math.randomseed(os.time())
 
--- Arrays of color schemes for light and dark modes
---local light_colorschemes = {
---	"everforest",
---	"github_light",
---	"kanagawa",
---	"rose-pine",
---	"tokyonight-day",
---	"gruvbox",
---}
 local dark_colorschemes = {
+	"catppuccin",
+	"catppuccin-frappe",
+	"everforest",
 	"rose-pine",
 	"tokyonight",
 	"gruvbox",
 	"kanagawa",
 	"github_dark",
 	"nightfox",
+	"habamax",
+	"oxocarbon",
+	"retrobox",
 }
-
--- function to determine whether it's currently day or night
---local function is_daytime()
---	local hour = os.date("*t").hour
---	return hour < 19 and hour > 6
---end
-
---local colorscheme
-
---if is_daytime() then
---	vim.opt.background = "light"
---	-- Select a random light colorscheme
---	colorscheme = light_colorschemes[math.random(#light_colorschemes)]
---else
---	vim.opt.background = "dark"
---	-- Select a random dark colorscheme
---	colorscheme = dark_colorschemes[math.random(#dark_colorschemes)]
---end
 
 vim.opt.background = "dark"
 local colorscheme = dark_colorschemes[math.random(#dark_colorschemes)]
