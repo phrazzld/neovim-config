@@ -9,7 +9,7 @@ local dark_colorschemes = {
 	"everforest",
 	"rose-pine",
 	"tokyonight",
-	"gruvbox",
+	--[[ "gruvbox", ]]
 	"kanagawa",
 	"github_dark",
 	"nightfox",

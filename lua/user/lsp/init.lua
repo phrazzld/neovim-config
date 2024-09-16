@@ -11,6 +11,8 @@ require("mason-lspconfig").setup({
 		"ts_ls",
 		"lua_ls",
 		"gopls",
+		"bashls",
+		"pyright",
 	},
 })
 
