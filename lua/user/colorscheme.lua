@@ -25,11 +25,13 @@ local light_colorschemes = {
 	"github_light",
 }
 
+local INITIAL_COLORSCHEME = "light"
+
 -- Set initial background to dark
-vim.opt.background = "dark"
+vim.opt.background = INITIAL_COLORSCHEME
 
 -- Initialize current theme mode
-_G.current_theme_mode = "dark"
+_G.current_theme_mode = INITIAL_COLORSCHEME
 
 -- Function to toggle between light and dark themes
 function ToggleTheme()
@@ -66,7 +68,13 @@ end
 vim.api.nvim_set_keymap("n", "<leader>th", ":lua ToggleTheme()<CR>", { noremap = true, silent = true })
 
 -- Apply an initial colorscheme
-local initial_colorscheme = dark_colorschemes[math.random(#dark_colorschemes)]
+local initial_colorscheme
+if _G.current_theme_mode == "dark" then
+	initial_colorscheme = dark_colorschemes[math.random(#dark_colorschemes)]
+else
+	initial_colorscheme = light_colorschemes[math.random(#light_colorschemes)]
+end
+
 local ok, err = pcall(vim.cmd, "colorscheme " .. initial_colorscheme)
 if not ok then
 	vim.notify("Failed to load the colorscheme '" .. initial_colorscheme .. "'. Error: " .. err, vim.log.levels.ERROR)
