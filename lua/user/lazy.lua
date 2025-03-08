@@ -99,9 +99,7 @@ require("lazy").setup({
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-			opts = function()
-				require("typescript-tools").setup({})
-			end,
+			-- Remove automatic setup since we're configuring it explicitly in init.lua
 		},
 		-- golang
 		{ "ray-x/go.nvim" },
@@ -109,7 +107,7 @@ require("lazy").setup({
 		-- treesitter
 		{
 			"nvim-treesitter/nvim-treesitter",
-			run = function()
+			build = function()
 				local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 				ts_update()
 			end,
@@ -139,6 +137,14 @@ require("lazy").setup({
 
 		-- make it easy to add surrounding characters
 		{ "tpope/vim-surround" },
+
+		-- typing test
+		{
+			"nvzone/typr",
+			dependencies = "nvzone/volt",
+			opts = {},
+			cmd = { "Typr", "TyprStats" },
+		},
 
 		-- todos and diagnostics
 		{

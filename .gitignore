@@ -4,3 +4,5 @@ plugin/packer_compiled.lua
 .tool-versions
 lua/.luarc.json
 lazy-lock.json
+PROBLEMS.md
+CONTEXT.md

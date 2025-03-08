@@ -77,6 +77,12 @@ M.on_attach = function(client, bufnr)
 	if client.name == "ts_ls" then
 		client.server_capabilities.document_formatting = false
 	end
+	
+	-- Disable semantic tokens to fix the nvim__buf_redraw_range error
+	if client.server_capabilities.semanticTokensProvider then
+		client.server_capabilities.semanticTokensProvider = nil
+	end
+	
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end
