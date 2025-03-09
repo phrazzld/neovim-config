@@ -1,42 +1,55 @@
-# Neovim Config 🛠️
+# Neovim Configuration
 
-This repository contains my personal Neovim configuration, written in Lua. It is designed to provide an efficient and feature-rich development environment with the Rose Pine colorscheme, robust LSP support, and efficient code navigation.
+My modern, modular Neovim setup optimized for performance, productivity, and aesthetics. Built entirely in Lua with the elegant Rose Pine colorscheme.
 
-## Features ✨
+## Core Features
 
-- **Rose Pine Theme**: Beautiful and consistent colorscheme with light/dark mode support
-- **Full LSP Support**: Integrated with Mason for easy LSP server management
-- **Intelligent Code Completion**: Using nvim-cmp with LSP integration
-- **Fast Navigation**: Telescope for fuzzy finding and Hop for quick movement
-- **Git Integration**: Gitsigns and Fugitive for seamless Git workflows
-- **Diagnostic Tools**: Trouble.nvim and todo-comments for easy issue tracking
-- **Language Support**: Preconfigured for TypeScript, Lua, Go, Rust, Python, and more
+- **Performance-Optimized**: Lazy-loading plugins and deferred initialization for <100ms startup
+- **Rose Pine Theme**: Clean, minimal aesthetic with light/dark mode toggle
+- **Modern LSP Experience**: Intelligent code completion, diagnostics, and navigation
+- **TypeScript Power Tools**: First-class support for TS/TSX with typescript-tools.nvim
+- **Git Integration**: Seamless workflow with gitsigns and fugitive
+- **Distraction-Free Writing**: Markdown support with Goyo and auto-formatting
 
-## Structure 📁
+## Key Plugins
 
-- `init.lua`: Main entry point that loads all modules
-- `lua/user/`: Contains modular configuration files:
-  - `lazy.lua`: Plugin management using lazy.nvim
-  - `lsp/`: LSP configuration with handlers and language-specific settings
-  - `colorscheme.lua`: Rose Pine theme configuration with light/dark mode toggle
-  - And many more feature-specific modules
+- **Plugin Management**: lazy.nvim for performance-focused plugin loading
+- **Fuzzy Finding**: Telescope for files, buffers, and project-wide search
+- **Quick Navigation**: Hop.nvim for efficient cursor movement
+- **File Browser**: NvimTree for directory exploration
+- **Language Support**: TypeScript/JS, Lua, Go, Rust, Python, and more
 
-## Getting Started 🚀
+## Installation
 
-1. Clone this repository to your Neovim config directory:
-   ```
-   git clone https://github.com/yourusername/nvim-config ~/.config/nvim
-   ```
-2. Start Neovim and lazy.nvim will automatically install all plugins
-3. Use `:Mason` to install any additional language servers
+```bash
+git clone https://github.com/phrazzld/neovim-config ~/.config/nvim
+```
 
-## Keyboard Shortcuts 🎹
+The first time you run Neovim, lazy.nvim will automatically install all plugins.
 
-- `<leader>th`: Toggle between light and dark themes
-- `<leader>xx`: Toggle diagnostics panel (Trouble)
-- `<leader>u`: Find files with Telescope
-- `<leader>s`: Live grep with Telescope
+## Useful Keybindings
 
-## License ⚖️
+| Key           | Action                      |
+|---------------|----------------------------|
+| `<leader>th`  | Toggle light/dark theme    |
+| `<leader>u`   | Find files (Telescope)     |
+| `<leader>s`   | Search in files (Telescope)|
+| `<leader>to`  | Organize TS imports        |
+| `<leader>e`   | Toggle file explorer       |
+| `<leader>gs`  | Git status                 |
+| `<leader>xx`  | Toggle diagnostics panel   |
+| `<C-f>f`      | Format current file        |
 
-This Neovim configuration is available under the MIT License. For more details, see the [LICENSE](LICENSE) file.
+## Configuration Structure
+
+- `init.lua`: Entry point that loads configuration modules
+- `lua/user/`: Modular configuration files:
+  - `lazy.lua`: Plugin manager setup (loads first)
+  - `options.lua`: Core Neovim settings
+  - `lsp/`: Language Server Protocol configuration
+  - `colorscheme.lua`: Theme configuration
+  - `keymappings.lua`: Global key bindings
+
+## License
+
+This configuration is available under the MIT License. See the [LICENSE](LICENSE) file for more details.
