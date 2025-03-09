@@ -1,9 +1,14 @@
 # Neovim Configuration Refactoring Opportunities
 
-## 1. Optimize Plugin Loading
-- Implement consistent lazy loading strategy for all heavy plugins
-- Move TypeScript setup from init.lua to a dedicated module
-- Fix duplicate "go" module require
+## 1. ✅ Optimize Plugin Loading (COMPLETED)
+- ✅ Implement consistent lazy loading strategy for all heavy plugins
+- ✅ Move TypeScript setup from init.lua to a dedicated module
+- ✅ Apply lazy loading to language plugins based on filetype
+- ✅ Optimize Treesitter plugins with event-based lazy loading
+
+## 1a. UI/Theme Optimizations (COMPLETED)
+- ✅ Fix theme flickering during startup
+- ✅ Implement time-based theme detection
 
 ## 2. Fix LSP Configuration Fragmentation
 - Standardize server setup patterns across the codebase
