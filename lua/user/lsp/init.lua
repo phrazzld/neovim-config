@@ -1,11 +1,28 @@
-local ok, _ = pcall(require, "lspconfig")
+local ok, lspconfig = pcall(require, "lspconfig")
 if not ok then
 	vim.notify("failed to init lspconfig")
 	return
 end
 
-require("mason").setup()
-require("mason-lspconfig").setup({
+-- Initialize the LSP handlers first to ensure they're available
+local handlers = require("user.lsp.handlers")
+handlers.setup()
+
+-- Set up Mason and Mason-lspconfig
+local mason_ok, mason = pcall(require, "mason")
+if not mason_ok then
+	vim.notify("Failed to load Mason")
+	return
+end
+mason.setup()
+
+local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_ok then
+	vim.notify("Failed to load mason-lspconfig")
+	return
+end
+
+mason_lspconfig.setup({
 	ensure_installed = {
 		"rust_analyzer",
 		"ts_ls",
@@ -13,32 +30,35 @@ require("mason-lspconfig").setup({
 		"gopls",
 		"bashls",
 		"pyright",
+		"jsonls",
 	},
 })
 
+-- Default options for all servers
 local opts = {
-	on_attach = require("user.lsp.handlers").on_attach,
-	capabilities = require("user.lsp.handlers").capabilities,
+	on_attach = handlers.on_attach,
+	capabilities = handlers.capabilities,
 }
-require("mason-lspconfig").setup_handlers({
-	-- Default, runs for each installed server that doesn't have a dedicated handler
+
+-- Server-specific settings
+local servers = {
+	["ts_ls"] = require("user.lsp.settings.ts_ls"),
+	["lua_ls"] = require("user.lsp.settings.lua_ls"),
+	["jsonls"] = require("user.lsp.settings.jsonls"),
+	["rust_analyzer"] = {},
+}
+
+mason_lspconfig.setup_handlers({
+	-- Default handler for servers not explicitly configured
 	function(server_name)
-		require("lspconfig")[server_name].setup(opts)
-	end,
-	-- Targeted overrides
-	["ts_ls"] = function()
-		local ts_ls_opts = require("user.lsp.settings.ts_ls")
-		opts = vim.tbl_deep_extend("force", ts_ls_opts, opts)
-		require("lspconfig").ts_ls.setup(opts)
-	end,
-	["lua_ls"] = function()
-		local lua_opts = require("user.lsp.settings.lua_ls")
-		opts = vim.tbl_deep_extend("force", lua_opts, opts)
-		require("lspconfig").lua_ls.setup(opts)
+		local server_opts = servers[server_name] or {}
+		local final_opts = vim.tbl_deep_extend("force", server_opts, opts)
+		lspconfig[server_name].setup(final_opts)
 	end,
 })
 
+-- Set up null-ls
 require("user.lsp.null-ls")
-require("lspconfig").rust_analyzer.setup({})
 
+-- Global keymapping for diagnostics
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { noremap = true, silent = true })
