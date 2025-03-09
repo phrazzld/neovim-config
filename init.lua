@@ -1,22 +1,16 @@
+-- Only load the base requirements
 require("user.lazy")
 require("user.options")
 require("user.keymappings")
-require("go").setup()
 require("user.colorscheme")
-require("user.cmp")
 require("user.lsp")
-require("user.telescope")
-require("user.autopairs")
-require("user.comment")
-require("user.gitsigns")
-require("user.nvim-tree")
-require("user.toggleterm")
-require("user.lualine")
 require("user.markdown")
 require("user.autocmds")
-require("colorizer").setup()
-require("user.trouble")
-require("user.todo-comments")
+
+-- Go setup is deferred since it's heavy
+vim.defer_fn(function()
+	require("go").setup()
+end, 100)
 
 -- Configure typescript-tools explicitly
 require("typescript-tools").setup({

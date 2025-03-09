@@ -53,12 +53,22 @@ require("lazy").setup({
 		{ "delphinus/vim-firestore" },
 
 		-- completions
-		{ "hrsh7th/nvim-cmp" },
-		{ "hrsh7th/cmp-buffer" },
-		{ "hrsh7th/cmp-path" },
-		{ "hrsh7th/cmp-cmdline" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "hrsh7th/cmp-nvim-lua" },
+		{
+			"hrsh7th/nvim-cmp",
+			event = "InsertEnter",
+			dependencies = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-nvim-lua",
+				"L3MON4D3/LuaSnip",
+				"rafamadriz/friendly-snippets",
+			},
+			config = function()
+				require("user.cmp").setup()
+			end,
+		},
 
 		-- markdown
 		{ "junegunn/goyo.vim" },
@@ -67,7 +77,11 @@ require("lazy").setup({
 		-- navigation
 		{
 			"nvim-telescope/telescope.nvim",
+			cmd = "Telescope",
 			dependencies = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
+			config = function()
+				require("user.telescope").setup()
+			end,
 		},
 		-- get around faster within a buffer
 		{
@@ -79,12 +93,24 @@ require("lazy").setup({
 		},
 		-- file tree
 		{ "kyazdani42/nvim-web-devicons" },
-		{ "kyazdani42/nvim-tree.lua" },
+		{
+			"kyazdani42/nvim-tree.lua",
+			cmd = "NvimTreeToggle",
+			config = function()
+				require("user.nvim-tree").setup()
+			end,
+		},
 		-- floating statuslines
 		{ "b0o/incline.nvim" },
 
 		-- git
-		{ "lewis6991/gitsigns.nvim" },
+		{
+			"lewis6991/gitsigns.nvim",
+			event = "BufReadPost",
+			config = function()
+				require("user.gitsigns").setup()
+			end,
+		},
 		{ "tpope/vim-fugitive" },
 
 		-- snippets
@@ -114,20 +140,50 @@ require("lazy").setup({
 		},
 		{ "p00f/nvim-ts-rainbow" }, -- colored parens
 
-		{ "windwp/nvim-autopairs" },
+		{
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			config = function()
+				require("user.autopairs").setup()
+			end,
+		},
 
 		-- easy comments
-		{ "numToStr/Comment.nvim" },
+		{
+			"numToStr/Comment.nvim",
+			event = "BufReadPost",
+			config = function()
+				require("user.comment").setup()
+			end,
+		},
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 
 		-- terminal
-		{ "akinsho/toggleterm.nvim" },
+		{
+			"akinsho/toggleterm.nvim",
+			cmd = "ToggleTerm",
+			config = function()
+				require("user.toggleterm").setup()
+			end,
+		},
 
 		-- statusline
-		{ "nvim-lualine/lualine.nvim" },
+		{
+			"nvim-lualine/lualine.nvim",
+			event = "VimEnter",
+			config = function()
+				require("user.lualine").setup()
+			end,
+		},
 
 		-- show colors in files
-		{ "norcalli/nvim-colorizer.lua" },
+		{
+			"norcalli/nvim-colorizer.lua",
+			event = "BufReadPost",
+			config = function()
+				require("colorizer").setup()
+			end,
+		},
 
 		-- better indents
 		{ "tpope/vim-sleuth" },
@@ -137,14 +193,6 @@ require("lazy").setup({
 
 		-- make it easy to add surrounding characters
 		{ "tpope/vim-surround" },
-
-		-- typing test
-		{
-			"nvzone/typr",
-			dependencies = "nvzone/volt",
-			opts = {},
-			cmd = { "Typr", "TyprStats" },
-		},
 
 		-- todos and diagnostics
 		{
