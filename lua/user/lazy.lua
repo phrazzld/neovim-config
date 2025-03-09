@@ -29,9 +29,7 @@ function M.setup()
 			{
 				"supermaven-inc/supermaven-nvim",
 				event = "VeryLazy",
-				config = function()
-					require("supermaven-nvim").setup({})
-				end,
+				-- Configuration is handled in user/supermaven.lua
 			},
 
 			-- common dependencies
