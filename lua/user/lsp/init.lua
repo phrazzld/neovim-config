@@ -55,10 +55,9 @@ function M.setup()
 		function(server_name)
 			-- Skip ts_ls since we're using typescript-tools instead
 			if server_name == "ts_ls" then
-				vim.notify("Skipping ts_ls setup - using typescript-tools instead", vim.log.levels.INFO)
 				return
 			end
-			
+
 			local server_opts = servers[server_name] or {}
 			local final_opts = vim.tbl_deep_extend("force", server_opts, opts)
 			lspconfig[server_name].setup(final_opts)
