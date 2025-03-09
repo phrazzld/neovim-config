@@ -1,44 +1,39 @@
--- Helper for safe module loading
-local function safe_require(module, fallback_fn)
-    local ok, result = pcall(require, module)
-    if not ok then
-        vim.notify("Error loading " .. module .. "\n" .. result, vim.log.levels.WARN)
-        if fallback_fn then
-            fallback_fn()
-        end
-        return nil
+-- Optimize startup time by minimizing initial loads
+vim.loader.enable()  -- Use Neovim's faster loader feature
+
+-- Setup plugins first so colorscheme is available
+require("user.lazy") -- Must be loaded first - loads plugins
+
+-- Set core functionality
+require("user.options") -- Core Neovim options
+require("user.keymappings") -- Basic keymaps only
+
+-- Set colorscheme after plugins are loaded
+require("user.colorscheme") -- Load after plugins to ensure colorscheme is available
+
+-- Defer non-essential components to after startup
+vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    callback = function()
+        -- Schedule non-critical components with delays
+        vim.defer_fn(function()
+            pcall(require, "user.lsp")
+            pcall(require, "user.autocmds")
+        end, 100)
+        
+        vim.defer_fn(function()
+            pcall(require, "user.markdown")
+            if pcall(require, "user.typescript") then
+                pcall(require("user.typescript").setup)
+            end
+        end, 200)
+        
+        vim.defer_fn(function()
+            -- Load very heavy components last
+            pcall(require, "user.supermaven")
+            if pcall(require, "go") then
+                require("go").setup()
+            end
+        end, 500)
     end
-    return result
-end
-
--- Core modules (these should never fail)
-safe_require("user.lazy") -- must succeed for plugins to work
-safe_require("user.options") 
-safe_require("user.keymappings")
-safe_require("user.colorscheme")
-
--- Feature modules with graceful degradation
-local lsp_module = safe_require("user.lsp")
-safe_require("user.markdown")
-safe_require("user.autocmds")
-
--- Optional modules
-local typescript = safe_require("user.typescript")
-if typescript then
-    pcall(typescript.setup)
-end
-
--- External plugins with safe requires
-pcall(function() 
-    safe_require("user.supermaven")
-end)
-
--- Go setup is deferred since it's heavy
-vim.defer_fn(function()
-    pcall(function()
-        local go = safe_require("go")
-        if go then
-            go.setup()
-        end
-    end)
-end, 100)
+})

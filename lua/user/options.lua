@@ -27,6 +27,10 @@ local options = {
 	autoindent = true,
 	smartindent = true,
 	laststatus = 3,
+	-- Disable folding completely
+	foldenable = false,
+	foldmethod = "manual",
+	foldlevelstart = 99,
 }
 
 for k, v in pairs(options) do

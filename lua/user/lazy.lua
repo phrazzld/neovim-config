@@ -25,14 +25,15 @@ require("lazy").setup({
 		-- help from robots
 		{
 			"supermaven-inc/supermaven-nvim",
+			event = "VeryLazy",
 			config = function()
 				require("supermaven-nvim").setup({})
 			end,
 		},
 
 		-- common dependencies
-		{ "nvim-lua/popup.nvim" },
-		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-lua/popup.nvim", lazy = true },
+		{ "nvim-lua/plenary.nvim", lazy = true },
 
 		-- colorschemes
 		{ "ellisonleao/gruvbox.nvim" },
@@ -46,24 +47,27 @@ require("lazy").setup({
 		{ "rose-pine/neovim", name = "rose-pine" },
 
 		-- lsp stuff
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
-		{ "neovim/nvim-lspconfig" },
-		{ "jose-elias-alvarez/null-ls.nvim" },
-		{ "delphinus/vim-firestore" },
+		{ "williamboman/mason.nvim", event = "VeryLazy" },
+		{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
+		{ "neovim/nvim-lspconfig", event = "VeryLazy" },
+		{ "jose-elias-alvarez/null-ls.nvim", event = "VeryLazy" },
+		{ "delphinus/vim-firestore", ft = "firestore" },
 
 		-- completions
 		{
 			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
 			dependencies = {
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-cmdline",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-nvim-lua",
-				"L3MON4D3/LuaSnip",
-				"rafamadriz/friendly-snippets",
+				{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
+				{ "hrsh7th/cmp-path", event = "InsertEnter" },
+				{ "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
+				{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+				{ "hrsh7th/cmp-nvim-lua", event = "InsertEnter" },
+				{
+					"L3MON4D3/LuaSnip",
+					event = "InsertEnter",
+					dependencies = { "rafamadriz/friendly-snippets" },
+				},
 			},
 			config = function()
 				require("user.cmp").setup()
@@ -71,8 +75,8 @@ require("lazy").setup({
 		},
 
 		-- markdown
-		{ "junegunn/goyo.vim" },
-		{ "preservim/vim-markdown" },
+		{ "junegunn/goyo.vim", cmd = "Goyo" },
+		{ "preservim/vim-markdown", ft = "markdown" },
 
 		-- navigation
 		{
@@ -87,12 +91,13 @@ require("lazy").setup({
 		{
 			"smoka7/hop.nvim",
 			version = "*",
+			cmd = { "HopWord", "HopLine", "HopChar1" },
 			opts = {
 				keys = "etovxqpdygfblzhckisuran",
 			},
 		},
 		-- file tree
-		{ "kyazdani42/nvim-web-devicons" },
+		{ "kyazdani42/nvim-web-devicons", lazy = true },
 		{
 			"kyazdani42/nvim-tree.lua",
 			cmd = "NvimTreeToggle",
@@ -101,7 +106,7 @@ require("lazy").setup({
 			end,
 		},
 		-- floating statuslines
-		{ "b0o/incline.nvim" },
+		{ "b0o/incline.nvim", event = "VeryLazy" },
 
 		-- git
 		{
@@ -111,11 +116,11 @@ require("lazy").setup({
 				require("user.gitsigns").setup()
 			end,
 		},
-		{ "tpope/vim-fugitive" },
+		{ "tpope/vim-fugitive", cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" } },
 
 		-- snippets
-		{ "L3MON4D3/LuaSnip" },
-		{ "rafamadriz/friendly-snippets" },
+		{ "L3MON4D3/LuaSnip", event = "InsertEnter" },
+		{ "rafamadriz/friendly-snippets", event = "InsertEnter" },
 
 		-- languages
 		{ "tjdevries/nlua.nvim", ft = "lua" },
@@ -138,11 +143,14 @@ require("lazy").setup({
 				local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 				ts_update()
 			end,
-			event = "BufReadPost",
+			event = "VeryLazy",
+			config = function()
+				require("user.treesitter").setup()
+			end,
 		},
 		{ 
 			"p00f/nvim-ts-rainbow", 
-			event = "BufReadPost",
+			event = "VeryLazy",
 			dependencies = { "nvim-treesitter/nvim-treesitter" }
 		}, -- colored parens
 
@@ -162,7 +170,7 @@ require("lazy").setup({
 				require("user.comment").setup()
 			end,
 		},
-		{ "JoosepAlviste/nvim-ts-context-commentstring" },
+		{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 		-- terminal
 		{
@@ -176,7 +184,7 @@ require("lazy").setup({
 		-- statusline
 		{
 			"nvim-lualine/lualine.nvim",
-			event = "VimEnter",
+			event = "VeryLazy",
 			config = function()
 				require("user.lualine").setup()
 			end,
@@ -185,7 +193,7 @@ require("lazy").setup({
 		-- show colors in files
 		{
 			"norcalli/nvim-colorizer.lua",
-			event = "BufReadPost",
+			event = "VeryLazy",
 			config = function()
 				require("colorizer").setup()
 			end,
@@ -195,10 +203,10 @@ require("lazy").setup({
 		{ "tpope/vim-sleuth" },
 
 		-- vim sugar for unix shell commands
-		{ "tpope/vim-eunuch" },
+		{ "tpope/vim-eunuch", cmd = { "Rename", "Move", "Delete", "Mkdir", "Chmod", "SudoWrite" } },
 
 		-- make it easy to add surrounding characters
-		{ "tpope/vim-surround" },
+		{ "tpope/vim-surround", event = "BufReadPost" },
 
 		-- todos and diagnostics
 		{
@@ -241,7 +249,8 @@ require("lazy").setup({
 		{
 			"folke/todo-comments.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
-			opts = {},
+			event = "VeryLazy",
+			opts = { signs = false },
 			keys = {
 				{
 					"<leader>xt",
@@ -254,6 +263,20 @@ require("lazy").setup({
 	-- configure any other settings here
 	-- colorscheme that will be used when installing plugins
 	install = { colorscheme = { "tokyonight" } },
-	-- automaticall check for plugin updates
-	checker = { enabled = true },
+	-- automatically check for plugin updates
+	checker = { enabled = true, frequency = 86400 }, -- check once a day
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })

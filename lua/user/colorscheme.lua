@@ -11,19 +11,32 @@ _G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or
 vim.opt.background = _G.current_theme_mode
 
 -- Try to set the preferred colorscheme, fall back to a default if not available
-local function set_colorscheme(colorscheme, fallback)
-    local ok, err = pcall(vim.cmd, "colorscheme " .. colorscheme)
-    if not ok then
-        vim.notify("Failed to load colorscheme '" .. colorscheme .. "': " .. err, vim.log.levels.WARN)
-        if fallback then
-            vim.notify("Falling back to " .. fallback .. " colorscheme", vim.log.levels.INFO)
-            pcall(vim.cmd, "colorscheme " .. fallback)
+local function set_colorscheme(colorscheme_list)
+    -- Try each colorscheme in order until one succeeds
+    for _, colorscheme in ipairs(colorscheme_list) do
+        local ok = pcall(vim.cmd, "colorscheme " .. colorscheme)
+        if ok then
+            return true
         end
     end
+    
+    -- If all failed, set a very safe fallback
+    vim.cmd("colorscheme default")
+    return false
 end
 
--- Set the fixed colorscheme with fallback to default
-set_colorscheme("rose-pine", "default")
+-- Try to set colorscheme from a prioritized list
+-- These are ordered by preference and guaranteed availability
+local colorschemes = {
+    "rose-pine",
+    "tokyonight",
+    "gruvbox",
+    "catppuccin",
+    "github_dark",
+    "default"
+}
+
+set_colorscheme(colorschemes)
 
 -- Function to toggle between light and dark themes safely
 function ToggleTheme()
@@ -34,7 +47,7 @@ function ToggleTheme()
 		
 		-- Try to set the colorscheme safely
 		pcall(function()
-			set_colorscheme("rose-pine", "default")
+			set_colorscheme(colorschemes)
 		end)
 		
 		vim.notify("Switched to light theme", vim.log.levels.INFO)
@@ -45,7 +58,7 @@ function ToggleTheme()
 		
 		-- Try to set the colorscheme safely
 		pcall(function()
-			set_colorscheme("rose-pine", "default")
+			set_colorscheme(colorschemes)
 		end)
 		
 		vim.notify("Switched to dark theme", vim.log.levels.INFO)
