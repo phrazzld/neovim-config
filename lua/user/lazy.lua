@@ -35,15 +35,7 @@ require("lazy").setup({
 		{ "nvim-lua/popup.nvim", lazy = true },
 		{ "nvim-lua/plenary.nvim", lazy = true },
 
-		-- colorschemes
-		{ "ellisonleao/gruvbox.nvim" },
-		{ "folke/tokyonight.nvim" },
-		{ "catppuccin/nvim", name = "catppuccin" },
-		{ "rebelot/kanagawa.nvim" },
-		{ "EdenEast/nightfox.nvim" },
-		{ "projekt0n/github-nvim-theme" },
-		{ "sainnhe/everforest" },
-		{ "nyoom-engineering/oxocarbon.nvim" },
+		-- colorscheme
 		{ "rose-pine/neovim", name = "rose-pine" },
 
 		-- lsp stuff
@@ -148,10 +140,10 @@ require("lazy").setup({
 				require("user.treesitter").setup()
 			end,
 		},
-		{ 
-			"p00f/nvim-ts-rainbow", 
+		{
+			"p00f/nvim-ts-rainbow",
 			event = "VeryLazy",
-			dependencies = { "nvim-treesitter/nvim-treesitter" }
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
 		}, -- colored parens
 
 		{
@@ -262,7 +254,7 @@ require("lazy").setup({
 	},
 	-- configure any other settings here
 	-- colorscheme that will be used when installing plugins
-	install = { colorscheme = { "tokyonight" } },
+	install = { colorscheme = { "rose-pine" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true, frequency = 86400 }, -- check once a day
 	performance = {

@@ -1,10 +1,10 @@
 # Neovim Config 🛠️
 
-This repository contains my personal Neovim configuration, written in Lua. It is designed to provide an efficient and feature-rich development environment with dynamic theme switching, robust LSP support, and efficient code navigation.
+This repository contains my personal Neovim configuration, written in Lua. It is designed to provide an efficient and feature-rich development environment with the Rose Pine colorscheme, robust LSP support, and efficient code navigation.
 
 ## Features ✨
 
-- **Dynamic Theme Switching**: Automatically switches between light and dark themes based on time of day
+- **Rose Pine Theme**: Beautiful and consistent colorscheme with light/dark mode support
 - **Full LSP Support**: Integrated with Mason for easy LSP server management
 - **Intelligent Code Completion**: Using nvim-cmp with LSP integration
 - **Fast Navigation**: Telescope for fuzzy finding and Hop for quick movement
@@ -18,7 +18,7 @@ This repository contains my personal Neovim configuration, written in Lua. It is
 - `lua/user/`: Contains modular configuration files:
   - `lazy.lua`: Plugin management using lazy.nvim
   - `lsp/`: LSP configuration with handlers and language-specific settings
-  - `colorscheme.lua`: Dynamic theme switching logic
+  - `colorscheme.lua`: Rose Pine theme configuration with light/dark mode toggle
   - And many more feature-specific modules
 
 ## Getting Started 🚀

@@ -10,33 +10,21 @@ _G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or
 -- Set background before colorscheme to avoid flicker
 vim.opt.background = _G.current_theme_mode
 
--- Try to set the preferred colorscheme, fall back to a default if not available
-local function set_colorscheme(colorscheme_list)
-    -- Try each colorscheme in order until one succeeds
-    for _, colorscheme in ipairs(colorscheme_list) do
-        local ok = pcall(vim.cmd, "colorscheme " .. colorscheme)
-        if ok then
-            return true
-        end
+-- Set the colorscheme to rose-pine
+local function set_colorscheme()
+    -- Try to set rose-pine with current mode
+    local ok, _ = pcall(vim.cmd, "colorscheme rose-pine")
+    
+    if not ok then
+        -- If rose-pine fails, fall back to default
+        vim.cmd("colorscheme default")
+        return false
     end
     
-    -- If all failed, set a very safe fallback
-    vim.cmd("colorscheme default")
-    return false
+    return true
 end
 
--- Try to set colorscheme from a prioritized list
--- These are ordered by preference and guaranteed availability
-local colorschemes = {
-    "rose-pine",
-    "tokyonight",
-    "gruvbox",
-    "catppuccin",
-    "github_dark",
-    "default"
-}
-
-set_colorscheme(colorschemes)
+set_colorscheme()
 
 -- Function to toggle between light and dark themes safely
 function ToggleTheme()
@@ -45,9 +33,9 @@ function ToggleTheme()
 		vim.opt.background = "light"
 		_G.current_theme_mode = "light"
 		
-		-- Try to set the colorscheme safely
+		-- Set the colorscheme
 		pcall(function()
-			set_colorscheme(colorschemes)
+			set_colorscheme()
 		end)
 		
 		vim.notify("Switched to light theme", vim.log.levels.INFO)
@@ -56,9 +44,9 @@ function ToggleTheme()
 		vim.opt.background = "dark"
 		_G.current_theme_mode = "dark"
 		
-		-- Try to set the colorscheme safely
+		-- Set the colorscheme
 		pcall(function()
-			set_colorscheme(colorschemes)
+			set_colorscheme()
 		end)
 		
 		vim.notify("Switched to dark theme", vim.log.levels.INFO)

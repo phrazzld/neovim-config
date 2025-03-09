@@ -79,4 +79,4 @@ keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
 
 -- colors
 keymap("n", "<leader>00", "<CMD>set background=dark<CR><CMD>colorscheme rose-pine<CR>", opts)
-keymap("n", "<leader>ff", "<CMD>set background=light<CR><CMD>colorscheme github_light<CR>", opts)
+keymap("n", "<leader>ff", "<CMD>set background=light<CR><CMD>colorscheme rose-pine<CR>", opts)

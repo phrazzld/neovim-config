@@ -80,7 +80,7 @@ M.setup = function()
 	lualine.setup({
 		options = {
 			icons_enabled = true,
-			theme = "PaperColor",
+			theme = "rose-pine",
 			component_separators = { left = "|", right = "|" },
 			section_separators = { left = "", right = "" },
 			disabled_filetypes = { "alpha", "dashboard", "Outline", "markdown", "fzf", "TelescopePrompt" },
