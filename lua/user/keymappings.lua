@@ -52,7 +52,6 @@ function M.setup()
 
 	-- formatting
 	keymap("n", "<C-f>f", "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", opts)
-	keymap("n", "<C-f>o", "<CMD>OrganizeImports<CR>", opts)
 
 	-- hop
 	keymap("n", "<leader>o", "<CMD>HopWord<CR>", opts)
@@ -73,6 +72,8 @@ function M.setup()
 	-- typescript tools
 	keymap("n", "<leader>to", "<CMD>TSToolsOrganizeImports<CR>", opts)
 	keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
+	-- Add debug commands for TypeScript
+	keymap("n", "<leader>tl", "<CMD>LspInfo<CR>", opts)
 end
 
 return M

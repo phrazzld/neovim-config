@@ -34,6 +34,9 @@ local function _lsp_keymaps(bufnr)
 end
 
 function M.setup()
+	-- Enable LSP logging for debugging
+	vim.lsp.set_log_level("debug")
+	
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
 		{ name = "DiagnosticSignWarn", text = "" },

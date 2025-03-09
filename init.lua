@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("User", {
         
         vim.defer_fn(function()
             pcall(function() require("user.markdown").setup() end)
-            pcall(function() require("user.typescript").setup() end)
+            -- TypeScript is now configured directly in lazy.lua
         end, 200)
         
         vim.defer_fn(function()

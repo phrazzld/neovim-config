@@ -124,7 +124,32 @@ function M.setup()
 				"pmizio/typescript-tools.nvim",
 				dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 				ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "tsx", "jsx" },
-				-- Remove automatic setup since we're configuring it explicitly in init.lua
+				config = function()
+					require("typescript-tools").setup({
+						settings = {
+							-- Expose organize imports as a code action
+							expose_as_code_action = { "organize_imports" },
+							tsserver_file_preferences = {
+								includeCompletionsForModuleExports = true,
+								includeCompletionsWithSnippetText = true,
+								includeAutomaticOptionalChainCompletions = true,
+								includeCompletionsWithClassMembersSnippets = true,
+								includeCompletionsWithInsertText = true,
+								quotePreference = "auto",
+							},
+						},
+						-- Explicitly disable semantic tokens
+						on_attach = function(client, bufnr)
+							client.server_capabilities.semanticTokensProvider = nil
+							
+							-- Add buffer-local keymaps
+							vim.keymap.set("n", "<leader>to", "<cmd>TSToolsOrganizeImports<CR>", 
+								{ noremap = true, silent = true, buffer = bufnr })
+							vim.keymap.set("n", "<C-f>o", "<cmd>TSToolsOrganizeImports<CR>", 
+								{ noremap = true, silent = true, buffer = bufnr })
+						end,
+					})
+				end,
 			},
 			-- golang
 			{ "ray-x/go.nvim", ft = "go" },

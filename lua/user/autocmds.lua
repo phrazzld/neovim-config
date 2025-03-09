@@ -95,6 +95,21 @@ function M.setup()
 			vim.opt_local.softtabstop = 4
 		end,
 	})
+	
+	-- Ensure proper filetype for TSX files
+	vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+		pattern = "*.tsx",
+		callback = function()
+			local current_ft = vim.bo.filetype
+			vim.notify("TSX file detected: filetype=" .. current_ft, vim.log.levels.INFO)
+			
+			-- If filetype is not set correctly, fix it
+			if current_ft ~= "typescriptreact" then
+				vim.bo.filetype = "typescriptreact"
+				vim.notify("Changed filetype to typescriptreact", vim.log.levels.INFO)
+			end
+		end,
+	})
 end
 
 return M
