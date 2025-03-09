@@ -3,10 +3,16 @@ local M = {}
 M.setup = function()
 	local ok, telescope = pcall(require, "telescope")
 	if not ok then
+		vim.notify("Failed to load telescope", vim.log.levels.WARN)
 		return
 	end
 
-	local actions = require("telescope.actions")
+	-- Safely require actions
+	local actions_ok, actions = pcall(require, "telescope.actions")
+	if not actions_ok then
+		vim.notify("Failed to load telescope.actions", vim.log.levels.WARN)
+		return
+	end
 
 	telescope.setup({
 		defaults = {
