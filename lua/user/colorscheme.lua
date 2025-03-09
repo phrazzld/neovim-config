@@ -1,11 +1,17 @@
 -- Enable true color support
 vim.opt.termguicolors = true
 
+-- Get the current hour (0-23)
+local current_hour = os.date("*t").hour
+
+-- Determine theme mode based on time of day
+_G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or "dark"
+
+-- Set background before colorscheme to avoid flicker
+vim.opt.background = _G.current_theme_mode
+
 -- Set the fixed colorscheme
 vim.cmd("colorscheme rose-pine")
-
--- Initialize current theme mode
-_G.current_theme_mode = "dark"
 
 -- Function to toggle between light and dark themes
 function ToggleTheme()

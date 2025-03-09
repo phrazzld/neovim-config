@@ -118,17 +118,18 @@ require("lazy").setup({
 		{ "rafamadriz/friendly-snippets" },
 
 		-- languages
-		{ "tjdevries/nlua.nvim" },
-		{ "rust-lang/rust.vim" },
-		{ "kchmck/vim-coffee-script" },
-		{ "slim-template/vim-slim" },
+		{ "tjdevries/nlua.nvim", ft = "lua" },
+		{ "rust-lang/rust.vim", ft = "rust" },
+		{ "kchmck/vim-coffee-script", ft = "coffee" },
+		{ "slim-template/vim-slim", ft = "slim" },
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "tsx", "jsx" },
 			-- Remove automatic setup since we're configuring it explicitly in init.lua
 		},
 		-- golang
-		{ "ray-x/go.nvim" },
+		{ "ray-x/go.nvim", ft = "go" },
 
 		-- treesitter
 		{
@@ -137,8 +138,13 @@ require("lazy").setup({
 				local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
 				ts_update()
 			end,
+			event = "BufReadPost",
 		},
-		{ "p00f/nvim-ts-rainbow" }, -- colored parens
+		{ 
+			"p00f/nvim-ts-rainbow", 
+			event = "BufReadPost",
+			dependencies = { "nvim-treesitter/nvim-treesitter" }
+		}, -- colored parens
 
 		{
 			"windwp/nvim-autopairs",
