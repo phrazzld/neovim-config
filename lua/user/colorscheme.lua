@@ -1,33 +1,41 @@
--- Enable true color support
-vim.opt.termguicolors = true
+local M = {}
 
--- Get the current hour (0-23)
-local current_hour = os.date("*t").hour
+function M.setup()
+	-- Enable true color support
+	vim.opt.termguicolors = true
 
--- Determine theme mode based on time of day
-_G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or "dark"
+	-- Get the current hour (0-23)
+	local current_hour = os.date("*t").hour
 
--- Set background before colorscheme to avoid flicker
-vim.opt.background = _G.current_theme_mode
+	-- Determine theme mode based on time of day
+	_G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or "dark"
 
--- Set the colorscheme to rose-pine
-local function set_colorscheme()
-    -- Try to set rose-pine with current mode
-    local ok, _ = pcall(vim.cmd, "colorscheme rose-pine")
-    
-    if not ok then
-        -- If rose-pine fails, fall back to default
-        vim.cmd("colorscheme default")
-        return false
-    end
-    
-    return true
+	-- Set background before colorscheme to avoid flicker
+	vim.opt.background = _G.current_theme_mode
+
+	-- Apply the colorscheme
+	M.apply_colorscheme()
+
+	-- Set up theme toggle keybinding
+	M.setup_toggle_keybind()
 end
 
-set_colorscheme()
+-- Set the colorscheme to rose-pine
+function M.apply_colorscheme()
+	-- Try to set rose-pine with current mode
+	local ok, _ = pcall(vim.cmd, "colorscheme rose-pine")
+	
+	if not ok then
+		-- If rose-pine fails, fall back to default
+		vim.cmd("colorscheme default")
+		return false
+	end
+	
+	return true
+end
 
 -- Function to toggle between light and dark themes safely
-function ToggleTheme()
+function M.toggle_theme()
 	if _G.current_theme_mode == "dark" then
 		-- Switch to light mode
 		vim.opt.background = "light"
@@ -35,7 +43,7 @@ function ToggleTheme()
 		
 		-- Set the colorscheme
 		pcall(function()
-			set_colorscheme()
+			M.apply_colorscheme()
 		end)
 		
 		vim.notify("Switched to light theme", vim.log.levels.INFO)
@@ -46,12 +54,17 @@ function ToggleTheme()
 		
 		-- Set the colorscheme
 		pcall(function()
-			set_colorscheme()
+			M.apply_colorscheme()
 		end)
 		
 		vim.notify("Switched to dark theme", vim.log.levels.INFO)
 	end
 end
 
--- Bind the ToggleTheme function to <leader>th
-vim.keymap.set("n", "<leader>th", ToggleTheme, { noremap = true, silent = true, desc = "Toggle light/dark theme" })
+-- Setup theme toggle keybinding
+function M.setup_toggle_keybind()
+	-- Bind the toggle function to <leader>th
+	vim.keymap.set("n", "<leader>th", M.toggle_theme, { noremap = true, silent = true, desc = "Toggle light/dark theme" })
+end
+
+return M

@@ -18,7 +18,4 @@ function M.setup()
     })
 end
 
--- Initialize immediately
-M.setup()
-
 return M
