@@ -8,7 +8,7 @@ function M.setup()
 	local current_hour = os.date("*t").hour
 
 	-- Determine theme mode based on time of day
-	_G.current_theme_mode = (current_hour >= 6 and current_hour < 18) and "light" or "dark"
+	_G.current_theme_mode = (current_hour >= 6 and current_hour < 19) and "light" or "dark"
 
 	-- Set background before colorscheme to avoid flicker
 	vim.opt.background = _G.current_theme_mode
@@ -24,13 +24,13 @@ end
 function M.apply_colorscheme()
 	-- Try to set rose-pine with current mode
 	local ok, _ = pcall(vim.cmd, "colorscheme rose-pine")
-	
+
 	if not ok then
 		-- If rose-pine fails, fall back to default
 		vim.cmd("colorscheme default")
 		return false
 	end
-	
+
 	return true
 end
 
@@ -40,23 +40,23 @@ function M.toggle_theme()
 		-- Switch to light mode
 		vim.opt.background = "light"
 		_G.current_theme_mode = "light"
-		
+
 		-- Set the colorscheme
 		pcall(function()
 			M.apply_colorscheme()
 		end)
-		
+
 		vim.notify("Switched to light theme", vim.log.levels.INFO)
 	else
 		-- Switch to dark mode
 		vim.opt.background = "dark"
 		_G.current_theme_mode = "dark"
-		
+
 		-- Set the colorscheme
 		pcall(function()
 			M.apply_colorscheme()
 		end)
-		
+
 		vim.notify("Switched to dark theme", vim.log.levels.INFO)
 	end
 end
@@ -64,7 +64,12 @@ end
 -- Setup theme toggle keybinding
 function M.setup_toggle_keybind()
 	-- Bind the toggle function to <leader>th
-	vim.keymap.set("n", "<leader>th", M.toggle_theme, { noremap = true, silent = true, desc = "Toggle light/dark theme" })
+	vim.keymap.set(
+		"n",
+		"<leader>th",
+		M.toggle_theme,
+		{ noremap = true, silent = true, desc = "Toggle light/dark theme" }
+	)
 end
 
 return M

@@ -24,7 +24,10 @@ function M.setup()
 	vim.api.nvim_create_autocmd("BufEnter", {
 		pattern = "*.md",
 		callback = function()
-			vim.api.nvim_exec([[ SupermavenStop ]], false)
+			local api_ok, api = pcall(require, "supermaven-nvim.api")
+			if api_ok and api.is_running() then
+				vim.api.nvim_exec([[ SupermavenStop ]], false)
+			end
 		end,
 	})
 
