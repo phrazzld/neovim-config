@@ -70,19 +70,9 @@ function M.setup()
 	keymap("n", "<leader>td", "<CMD>TroubleToggle document_diagnostics<CR>", opts)
 	keymap("n", "<leader>tw", "<CMD>TroubleToggle workspace_diagnostics<CR>", opts)
 
-	-- copilot
-	--[[ vim.g.copilot_no_tab_map = true ]]
-	--[[ keymap("i", "<leader>cc", 'copilot#Accept("<CR>")', { silent = true, expr = true }) ]]
-	--[[ keymap("i", "<leader><leader>", 'copilot#Accept("<CR>")', { silent = true, expr = true }) ]]
-
 	-- typescript tools
 	keymap("n", "<leader>to", "<CMD>TSToolsOrganizeImports<CR>", opts)
 	keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
-	--[[ keymap("n", "<leader>td", "<CMD>TSToolsGoToSourceDefinition<CR>", opts) ]]
-
-	-- colors
-	keymap("n", "<leader>00", "<CMD>set background=dark<CR><CMD>colorscheme rose-pine<CR>", opts)
-	keymap("n", "<leader>ff", "<CMD>set background=light<CR><CMD>colorscheme rose-pine<CR>", opts)
 end
 
 return M
