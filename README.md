@@ -9,7 +9,8 @@ My modern, modular Neovim setup optimized for performance, productivity, and aes
 - **Modern LSP Experience**: Intelligent code completion, diagnostics, and navigation
 - **TypeScript Power Tools**: First-class support for TS/TSX with typescript-tools.nvim
 - **Git Integration**: Seamless workflow with gitsigns and fugitive
-- **Distraction-Free Writing**: Markdown support with Goyo and auto-formatting
+- **Distraction-Free Writing**: Markdown support with Goyo
+- **Robust Error Handling**: Prevention of LSP semantic tokens errors in TypeScript files
 
 ## Key Plugins
 

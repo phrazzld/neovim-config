@@ -95,7 +95,8 @@ function M.on_attach(client, bufnr)
 	end
 	
 	-- Disable semantic tokens to fix the nvim__buf_redraw_range error
-	if client.server_capabilities.semanticTokensProvider then
+	-- Safely check and disable semantic tokens
+	if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
 		client.server_capabilities.semanticTokensProvider = nil
 	end
 	

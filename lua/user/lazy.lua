@@ -140,7 +140,10 @@ function M.setup()
 						},
 						-- Explicitly disable semantic tokens
 						on_attach = function(client, bufnr)
-							client.server_capabilities.semanticTokensProvider = nil
+							-- Safely check and disable semantic tokens
+							if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
+								client.server_capabilities.semanticTokensProvider = nil
+							end
 							
 							-- Add buffer-local keymaps
 							vim.keymap.set("n", "<leader>to", "<cmd>TSToolsOrganizeImports<CR>", 
