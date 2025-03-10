@@ -76,11 +76,16 @@ function M.setup()
 					})
 				end
 				
-				-- Format on save for all files
+				-- Format on save for all files except markdown
 				vim.api.nvim_create_autocmd("BufWritePre", {
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
+						-- Skip formatting for markdown files
+						if vim.bo[bufnr].filetype == "markdown" then
+							return
+						end
+						
 						pcall(function()
 							vim.lsp.buf.format({ 
 								async = false,
