@@ -18,3 +18,33 @@
 ## Repository Organization
 - `init.lua`: Main entry point, requires all modules
 - `lua/user/`: Contains all configuration modules by feature
+
+## Development Principles
+
+### Commits
+- **Conventional Commits**: Use structured messages (`feat:`, `fix:`, `docs:`, `chore:`)
+- **Atomic Changes**: Each commit should contain exactly one logical change
+
+### Logging & Observability
+- Implement structured logging where applicable
+- Include detailed logs during development for easier troubleshooting
+
+### Architecture & Design
+- **Modularity**: Embrace loose coupling for maintainability
+- **Error Handling**: Prioritize explicit error handling with meaningful messages
+- **Separation of Concerns**: Keep business logic separate from infrastructure
+
+### Documentation
+- Document the **why** behind design decisions
+- Keep documentation close to the code in markdown format
+- Update documentation as part of completing any change
+
+### Performance & Security
+- Establish performance baselines for critical operations
+- Assume all inputs could be hostile; build with secure defaults
+- Regularly scan dependencies for vulnerabilities
+
+### Continuous Improvement
+- Regularly review code for improvement opportunities
+- Treat technical debt as real debt—actively manage and reduce it
+- Foster a culture that values learning from controlled failures
