@@ -6,20 +6,22 @@ M.setup = function()
 		return
 	end
 
-	require("incline").setup({
-		hide = {
-			cursorline = false,
-			focused_win = false,
-			only_win = false,
-		},
-		ignore = {
-			buftypes = "special",
-			filetypes = { "markdown" },
-			floating_wins = true,
-			unlisted_buffers = true,
-			wintypes = "special",
-		},
-	})
+	-- Disable incline.nvim since we're now showing full paths in lualine
+	-- and it was blocking text underneath
+	-- require("incline").setup({
+	-- 	hide = {
+	-- 		cursorline = false,
+	-- 		focused_win = false,
+	-- 		only_win = false,
+	-- 	},
+	-- 	ignore = {
+	-- 		buftypes = "special",
+	-- 		filetypes = { "markdown" },
+	-- 		floating_wins = true,
+	-- 		unlisted_buffers = true,
+	-- 		wintypes = "special",
+	-- 	},
+	-- })
 
 	local hide_in_width = function()
 		return vim.fn.winwidth(0) > 80
@@ -175,13 +177,13 @@ M.setup = function()
 		end,
 	}
 
-	-- Fancy filename with better path handling
+	-- Fancy filename with FULL path handling
 	local filename = {
 		"filename",
 		file_status = true,
 		newfile_status = true,
-		path = 1,
-		shorting_target = 40,
+		path = 3, -- Show full path (changed from 1 to 3)
+		shorting_target = 80, -- Increased from 40 to 80
 		symbols = {
 			modified = "󰷥 ",
 			readonly = "󱀰 ",
@@ -213,8 +215,12 @@ M.setup = function()
 				-- Determine icon based on percentage
 				local icons = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" }
 				local icon_index = math.ceil(line_ratio * #icons)
-				if icon_index < 1 then icon_index = 1 end
-				if icon_index > #icons then icon_index = #icons end
+				if icon_index < 1 then
+					icon_index = 1
+				end
+				if icon_index > #icons then
+					icon_index = #icons
+				end
 				local icon = icons[icon_index]
 				return " " .. icon .. " " .. percentage .. "%% "
 			end
@@ -337,10 +343,10 @@ M.setup = function()
 		},
 		sections = {
 			lualine_a = { mode },
-			lualine_b = { branch, diff },
-			lualine_c = { filename },
-			lualine_x = { filesize, encoding, fileformat, filetype },
-			lualine_y = { lsp_status, diagnostics, clock },
+			lualine_b = { filename }, -- moved filename to section B for more prominence
+			lualine_c = { branch, diff }, -- moved these to section C
+			lualine_x = { filesize, filetype }, -- removed encoding and fileformat to save space
+			lualine_y = { diagnostics, lsp_status }, -- removed clock to save space
 			lualine_z = { location, progress },
 		},
 		inactive_sections = {

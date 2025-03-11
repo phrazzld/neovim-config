@@ -99,7 +99,7 @@ function M.setup()
 				end,
 			},
 			-- floating statuslines
-			{ "b0o/incline.nvim", event = "VeryLazy" },
+			{ "b0o/incline.nvim", enabled = false }, -- disabled in favor of full paths in lualine
 
 			-- git
 			{
