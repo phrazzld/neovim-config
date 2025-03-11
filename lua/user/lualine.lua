@@ -5,24 +5,7 @@ M.setup = function()
 	if not ok then
 		return
 	end
-
-	-- Disable incline.nvim since we're now showing full paths in lualine
-	-- and it was blocking text underneath
-	-- require("incline").setup({
-	-- 	hide = {
-	-- 		cursorline = false,
-	-- 		focused_win = false,
-	-- 		only_win = false,
-	-- 	},
-	-- 	ignore = {
-	-- 		buftypes = "special",
-	-- 		filetypes = { "markdown" },
-	-- 		floating_wins = true,
-	-- 		unlisted_buffers = true,
-	-- 		wintypes = "special",
-	-- 	},
-	-- })
-
+	
 	local hide_in_width = function()
 		return vim.fn.winwidth(0) > 80
 	end
