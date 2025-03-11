@@ -44,7 +44,9 @@ M.setup = function()
 	local term_group = vim.api.nvim_create_augroup("TerminalKeymaps", { clear = true })
 	vim.api.nvim_create_autocmd("TermOpen", {
 		pattern = "term://*",
-		callback = function() _G.set_terminal_keymaps() end,
+		callback = function()
+			_G.set_terminal_keymaps()
+		end,
 		group = term_group,
 	})
 
@@ -54,17 +56,19 @@ M.setup = function()
 		vim.notify("Failed to load toggleterm terminal module", vim.log.levels.WARN)
 		return
 	end
-	
+
 	local Terminal = term_module.Terminal
-	
+
 	-- Helper function to create terminal toggles safely
 	local function create_terminal_toggle(name, cmd)
 		local terminal = Terminal:new({ cmd = cmd, hidden = true })
 		_G["_" .. name:upper() .. "_TOGGLE"] = function()
-			pcall(function() terminal:toggle() end)
+			pcall(function()
+				terminal:toggle()
+			end)
 		end
 	end
-	
+
 	-- Create all terminal toggles
 	create_terminal_toggle("lazygit", "lazygit")
 	create_terminal_toggle("node", "node")
