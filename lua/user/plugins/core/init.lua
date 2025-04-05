@@ -9,11 +9,4 @@ return {
 
 	-- better indents
 	{ "tpope/vim-sleuth" },
-
-	-- help from robots
-	{
-		"supermaven-inc/supermaven-nvim",
-		event = "VeryLazy",
-		-- Configuration is handled in user/supermaven.lua
-	},
 }

@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("User", {
         
         vim.defer_fn(function()
             -- Load very heavy components last
-            pcall(function() require("user.supermaven").setup() end)
             pcall(function() 
                 local ok, go = pcall(require, "go")
                 if ok then go.setup() end
