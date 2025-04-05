@@ -69,6 +69,9 @@ function M.setup()
 	keymap("n", "<leader>td", "<CMD>TroubleToggle document_diagnostics<CR>", opts)
 	keymap("n", "<leader>tw", "<CMD>TroubleToggle workspace_diagnostics<CR>", opts)
 
+	-- goyo (distraction-free writing)
+	keymap("n", "<leader>gy", "<CMD>Goyo<CR>", opts)
+
 	-- typescript tools
 	keymap("n", "<leader>to", "<CMD>TSToolsOrganizeImports<CR>", opts)
 	keymap("n", "<leader>ta", "<CMD>TSToolsAddMissingImports<CR>", opts)
