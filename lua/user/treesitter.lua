@@ -15,6 +15,8 @@ function M.setup()
 			"javascript",
 			"typescript",
 			"tsx",
+			"latex", -- Added for render-markdown.nvim LaTeX support
+			"html",  -- Added for render-markdown.nvim HTML comment support
 		},
 		sync_install = false,
 		auto_install = true,

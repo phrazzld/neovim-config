@@ -49,8 +49,8 @@ function M.setup()
 	end
 
 	local config = {
-		-- disable virtual text
-		virtual_text = false,
+		-- enable virtual text for diagnostics
+		virtual_text = true,
 		-- show signs
 		signs = {
 			active = signs,

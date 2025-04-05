@@ -29,6 +29,7 @@ function M.setup()
 			safe_source(formatting.prettier, "prettier"),
 			safe_source(formatting.stylua, "stylua"),
 			safe_source(formatting.rustfmt, "rustfmt"),
+			safe_source(formatting.jq, "jq"), -- Add jq formatter for JSON
 			
 			-- Diagnostics
 			-- Prefer eslint_d if available, fallback to eslint

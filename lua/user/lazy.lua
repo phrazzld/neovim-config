@@ -70,6 +70,17 @@ function M.setup()
 			-- markdown
 			{ "junegunn/goyo.vim", cmd = "Goyo" },
 			{ "preservim/vim-markdown", ft = "markdown" },
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				dependencies = { 
+					"nvim-treesitter/nvim-treesitter", 
+					"kyazdani42/nvim-web-devicons" 
+				},
+				ft = "markdown",
+				config = function()
+					require("user.markdown").setup()
+				end,
+			},
 
 			-- navigation
 			{
@@ -142,12 +153,20 @@ function M.setup()
 							if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
 								client.server_capabilities.semanticTokensProvider = nil
 							end
-							
+
 							-- Add buffer-local keymaps
-							vim.keymap.set("n", "<leader>to", "<cmd>TSToolsOrganizeImports<CR>", 
-								{ noremap = true, silent = true, buffer = bufnr })
-							vim.keymap.set("n", "<C-f>o", "<cmd>TSToolsOrganizeImports<CR>", 
-								{ noremap = true, silent = true, buffer = bufnr })
+							vim.keymap.set(
+								"n",
+								"<leader>to",
+								"<cmd>TSToolsOrganizeImports<CR>",
+								{ noremap = true, silent = true, buffer = bufnr }
+							)
+							vim.keymap.set(
+								"n",
+								"<C-f>o",
+								"<cmd>TSToolsOrganizeImports<CR>",
+								{ noremap = true, silent = true, buffer = bufnr }
+							)
 						end,
 					})
 				end,
