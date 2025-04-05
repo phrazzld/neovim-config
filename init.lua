@@ -1,6 +1,10 @@
 -- Optimize startup time by minimizing initial loads
 vim.loader.enable()  -- Use Neovim's faster loader feature
 
+-- Set leader keys BEFORE loading any plugins
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Setup plugins first so colorscheme is available
 require("user.lazy").setup() -- Must be loaded first - loads plugins
 

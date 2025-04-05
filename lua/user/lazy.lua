@@ -15,10 +15,7 @@ function M.setup()
 	end
 	vim.opt.runtimepath:prepend(lazypath)
 
-	-- Set up leader keys and other settings before loading lazy.nvim
-	vim.g.mapleader = " "
-	vim.g.maplocalleader = "\\"
-
+	-- Leader keys must be set in init.lua before requiring this module
 	-- Add any other vim options here
 	-- vim.opt.example = value
 

@@ -4,10 +4,9 @@ function M.setup()
 	local keymap = vim.api.nvim_set_keymap
 	local opts = { noremap = true, silent = true }
 
-	-- Make space the leader key
+	-- Make space the leader key (maps already set in init.lua)
 	keymap("", "<Space>", "<Nop>", opts)
-	vim.g.mapleader = " "
-	vim.g.maplocalleader = " "
+	-- Leader keys are now set in init.lua instead of here
 
 	-- Modes reference
 	--   normal_mode       = "n"
