@@ -1,3 +1,3 @@
 # BACKLOG
 
-- organize plugins better
+- remove supermaven
