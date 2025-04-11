@@ -28,8 +28,32 @@ function M.setup()
 			-- Formatters
 			safe_source(formatting.prettier, "prettier"),
 			safe_source(formatting.stylua, "stylua"),
-			safe_source(formatting.rustfmt, "rustfmt"),
-			safe_source(formatting.jq, "jq"), -- Add jq formatter for JSON
+			
+			-- Custom rustfmt formatter
+			(function() 
+				if vim.fn.executable("rustfmt") == 1 then
+					return null_ls.formatter({
+						command = "rustfmt",
+						args = {},
+						to_stdin = true,
+						filetypes = {"rust"},
+					})
+				end
+				return nil
+			end)(),
+			
+			-- Custom jq formatter
+			(function() 
+				if vim.fn.executable("jq") == 1 then
+					return null_ls.formatter({
+						command = "jq",
+						args = {"."},
+						to_stdin = true,
+						filetypes = {"json"},
+					})
+				end
+				return nil
+			end)(),
 			
 			-- Diagnostics
 			-- Prefer eslint_d if available, fallback to eslint

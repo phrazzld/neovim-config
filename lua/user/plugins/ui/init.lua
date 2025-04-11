@@ -8,7 +8,7 @@ return {
 			require("user.lualine").setup()
 		end,
 	},
-	
+
 	-- file tree
 	{ "kyazdani42/nvim-web-devicons", lazy = true },
 	{
@@ -18,7 +18,7 @@ return {
 			require("user.nvim-tree").setup()
 		end,
 	},
-	
+
 	-- show colors in files
 	{
 		"norcalli/nvim-colorizer.lua",

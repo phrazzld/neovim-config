@@ -4,7 +4,11 @@ return {
 	{ "williamboman/mason.nvim", event = "VeryLazy" },
 	{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
 	{ "neovim/nvim-lspconfig", event = "VeryLazy" },
-	{ "jose-elias-alvarez/null-ls.nvim", event = "VeryLazy" },
+	{ 
+		"nvimtools/none-ls.nvim", 
+		event = "VeryLazy",
+		dependencies = { "nvim-lua/plenary.nvim" }
+	},
 	
 	-- treesitter (syntax highlighting and code understanding)
 	{
