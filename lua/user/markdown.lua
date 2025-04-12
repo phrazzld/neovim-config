@@ -3,6 +3,19 @@ local M = {}
 function M.setup()
 	-- vim-markdown config
 	vim.g.vim_markdown_folding_disabled = true
+	
+	-- Using pcall to check for parser without triggering installation
+	local ts_ok = pcall(function()
+		-- Use non-deprecated way to check parser availability
+		local parsers = require("nvim-treesitter.parsers")
+		return parsers.has_parser("markdown")
+	end)
+	
+	if not ts_ok then
+		-- If TreeSitter parser is not available, use only vim-markdown
+		-- Don't show notification every time - it's annoying
+		return
+	end
 
 	-- render-markdown.nvim config
 	local status_ok, render_markdown = pcall(require, "render-markdown")

@@ -72,6 +72,8 @@ return {
 		},
 		ft = "markdown",
 		config = function()
+			-- We no longer configure TreeSitter here to avoid reinstallation
+			-- Just load markdown config directly
 			require("user.markdown").setup()
 		end,
 	},
