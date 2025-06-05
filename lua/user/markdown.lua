@@ -24,8 +24,8 @@ function M.setup()
 	end
 
 	render_markdown.setup({
-		-- Enable markdown rendering by default
-		enabled = true,
+		-- Disable markdown rendering by default - only activate via keymapping
+		enabled = false,
 		-- Render in normal, command, and terminal modes
 		render_modes = { "n", "c", "t" },
 		-- Don't try to render files larger than 10MB

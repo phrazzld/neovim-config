@@ -1,20 +1,20 @@
 -- Language-specific plugins
 return {
 	-- Firestore
-	{ "delphinus/vim-firestore", ft = "firestore" },
-	
+	{ "delphinus/vim-firestore",  ft = "firestore" },
+
 	-- Lua
-	{ "tjdevries/nlua.nvim", ft = "lua" },
-	
+	{ "tjdevries/nlua.nvim",      ft = "lua" },
+
 	-- Rust
-	{ "rust-lang/rust.vim", ft = "rust" },
-	
+	{ "rust-lang/rust.vim",       ft = "rust" },
+
 	-- CoffeeScript
 	{ "kchmck/vim-coffee-script", ft = "coffee" },
-	
+
 	-- Slim templates
-	{ "slim-template/vim-slim", ft = "slim" },
-	
+	{ "slim-template/vim-slim",   ft = "slim" },
+
 	-- TypeScript
 	{
 		"pmizio/typescript-tools.nvim",
@@ -58,17 +58,17 @@ return {
 			})
 		end,
 	},
-	
+
 	-- Golang
-	{ "ray-x/go.nvim", ft = "go" },
-	
+	{ "ray-x/go.nvim",          ft = "go" },
+
 	-- Markdown
 	{ "preservim/vim-markdown", ft = "markdown" },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { 
-			"nvim-treesitter/nvim-treesitter", 
-			"kyazdani42/nvim-web-devicons" 
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"kyazdani42/nvim-web-devicons"
 		},
 		ft = "markdown",
 		config = function()
@@ -78,3 +78,4 @@ return {
 		end,
 	},
 }
+
