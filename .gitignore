@@ -10,3 +10,11 @@ PLAN.md
 DEV-REF.md
 BUG.md
 BUGFIXPLAN.md
+
+# Thinktank analysis
+thinktank.log
+thinktank_*/
+
+# Temporary review files  
+*REVIEW*.md
+CODE_REVIEW*.md

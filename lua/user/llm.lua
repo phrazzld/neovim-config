@@ -67,8 +67,19 @@ M.config = {
 }
 
 local function get_visual_selection()
+	-- Verify we're actually in visual mode to prevent stale selection leakage
+	local mode = vim.fn.mode()
+	if mode ~= 'v' and mode ~= 'V' and mode ~= '\22' then -- v, V, and CTRL-V
+		return ""
+	end
+	
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
+	
+	-- Additional safety check for unset marks
+	if start_pos[2] == 0 or end_pos[2] == 0 then
+		return ""
+	end
 	
 	local lines = vim.api.nvim_buf_get_lines(
 		0, start_pos[2] - 1, end_pos[2], false
@@ -116,7 +127,7 @@ local function query_llm(prompt, callback)
 		on_exit = function(_, exit_code, _)
 			vim.schedule(function()
 				if exit_code == 0 then
-					local response = table.concat(response_data, '\n')
+					local response = table.concat(response_data, '')
 					local ok, json = pcall(vim.fn.json_decode, response)
 					if not ok then
 						vim.notify("Malformed JSON response from Ollama", vim.log.levels.ERROR)
@@ -141,7 +152,7 @@ local function query_llm(prompt, callback)
 	return job_id
 end
 
-local function insert_response(text, after_line)
+local function insert_response(bufnr, text, after_line)
 	if not text or text == "" then
 		return
 	end
@@ -157,14 +168,14 @@ local function insert_response(text, after_line)
 	-- Add trailing blank line for spacing
 	table.insert(quoted_lines, "")
 	
-	-- Insert after selection using nvim_buf_set_lines
-	vim.api.nvim_buf_set_lines(0, after_line, after_line, false, quoted_lines)
+	-- Insert after selection using specific buffer
+	vim.api.nvim_buf_set_lines(bufnr, after_line, after_line, false, quoted_lines)
 end
 
 local function handle_query(args)
 	-- Extract visual selection and validate
 	local selection = get_visual_selection()
-	if selection == "" then
+	if selection:match("^%s*$") then
 		vim.notify("No text selected", vim.log.levels.WARN)
 		return
 	end
@@ -172,13 +183,26 @@ local function handle_query(args)
 	-- Display progress notification
 	vim.notify("Querying LLM...", vim.log.levels.INFO)
 	
-	-- Capture insertion point before async call
-	local insert_line = vim.fn.line("'>")
+	-- Capture buffer and set persistent mark for async safety
+	local bufnr = vim.api.nvim_get_current_buf()
+	vim.api.nvim_buf_set_mark(bufnr, 'L', vim.fn.line("'>"), 0, {})
 	
 	-- Make LLM request with callback
 	query_llm(selection, function(response)
-		insert_response(response, insert_line)
-		vim.notify("Response received", vim.log.levels.INFO)
+		vim.schedule(function()
+			-- Validate buffer still exists
+			if not vim.api.nvim_buf_is_valid(bufnr) then
+				vim.notify("Buffer closed during query", vim.log.levels.WARN)
+				return
+			end
+			
+			-- Resolve mark position at insertion time
+			local mark_pos = vim.api.nvim_buf_get_mark(bufnr, 'L')
+			local insert_line = mark_pos[1]
+			
+			insert_response(bufnr, response, insert_line)
+			vim.notify("Response received", vim.log.levels.INFO)
+		end)
 	end)
 end
 
