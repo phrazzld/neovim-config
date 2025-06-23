@@ -1,3 +1,62 @@
+--[[
+Neovim Inline LLM Integration
+
+Allows querying local LLM models directly from visual selections.
+Select text in visual mode, press <leader>ll, and receive blockquoted responses
+inserted directly into the buffer.
+
+Requirements:
+- Local Ollama installation (https://ollama.ai)
+- curl command available in PATH
+- Ollama model pulled (e.g., ollama pull gemma3:4b)
+
+Usage:
+1. Select text in visual mode
+2. Press <leader>ll or run :LLMQuery
+3. Response appears as blockquoted text after selection
+
+Example workflow:
+  Before:
+    This is my code that needs explanation:
+    function add(a, b) { return a + b; }
+    
+  After selecting the function and pressing <leader>ll:
+    This is my code that needs explanation:
+    function add(a, b) { return a + b; }
+    
+    > This is a simple JavaScript function that takes two parameters (a and b)
+    > and returns their sum. It's a basic example of function syntax in JS.
+    >
+    
+Visual selection workflow:
+  • Position cursor at start of text
+  • Enter visual mode (v for characters, V for lines, <C-v> for block)
+  • Extend selection to cover desired text
+  • Press <leader>ll to query LLM
+  • Wait for "Querying LLM..." then "Response received" notifications
+  • LLM response appears as blockquoted text after selection
+
+Configuration options available via setup({ model, url, timeout, keymap })
+
+Troubleshooting:
+  Common Issues:
+  • "curl not found" error: Install curl via package manager
+    - macOS: brew install curl
+    - Ubuntu/Debian: sudo apt install curl
+    - Windows: Use scoop install curl or install via Git for Windows
+  
+  • Connection errors: Verify Ollama is running
+    - Check: curl http://localhost:11434/api/tags
+    - Start: ollama serve (or restart Ollama app)
+  
+  • Timeout errors: Increase timeout for complex queries
+    - Example: require("user.llm").config.timeout = 60000
+  
+  • Model errors: Ensure model is downloaded
+    - Example: ollama pull gemma3:4b
+    - List models: ollama list
+--]]
+
 local M = {}
 
 M.config = {
@@ -59,10 +118,18 @@ local function query_llm(prompt, callback)
 				if exit_code == 0 then
 					local response = table.concat(response_data, '\n')
 					local ok, json = pcall(vim.fn.json_decode, response)
-					if ok and json.response then
-						callback(json.response)
+					if not ok then
+						vim.notify("Malformed JSON response from Ollama", vim.log.levels.ERROR)
+					elseif json.error then
+						vim.notify("Ollama error: " .. json.error, vim.log.levels.ERROR)
+					elseif json.response then
+						if json.response == "" then
+							vim.notify("Empty response from LLM", vim.log.levels.WARN)
+						else
+							callback(json.response)
+						end
 					else
-						vim.notify("Invalid LLM response", vim.log.levels.ERROR)
+						vim.notify("Missing response field in Ollama output", vim.log.levels.ERROR)
 					end
 				else
 					vim.notify("LLM request failed (exit code: " .. exit_code .. ")", vim.log.levels.ERROR)
@@ -86,6 +153,9 @@ local function insert_response(text, after_line)
 	for _, line in ipairs(lines) do
 		table.insert(quoted_lines, '> ' .. line)
 	end
+	
+	-- Add trailing blank line for spacing
+	table.insert(quoted_lines, "")
 	
 	-- Insert after selection using nvim_buf_set_lines
 	vim.api.nvim_buf_set_lines(0, after_line, after_line, false, quoted_lines)
@@ -112,6 +182,23 @@ local function handle_query(args)
 	end)
 end
 
+--[[
+Setup function for LLM integration
+
+@param opts table|nil Configuration options (optional)
+@param opts.model string Model name for Ollama (default: "gemma3:4b")
+@param opts.url string Ollama server URL (default: "http://localhost:11434")
+@param opts.timeout number Request timeout in milliseconds (default: 30000)
+@param opts.keymap string Visual mode keymap to trigger LLM query (default: "<leader>ll")
+
+Example usage:
+  require("user.llm").setup({
+    model = "llama3.2:3b",
+    url = "http://localhost:11434",
+    timeout = 60000,
+    keymap = "<leader>ai"
+  })
+--]]
 M.setup = function(opts)
 	if vim.fn.executable('curl') == 0 then
 		vim.notify("curl not found. Please install curl.", vim.log.levels.ERROR)

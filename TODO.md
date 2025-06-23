@@ -57,28 +57,28 @@ Following Carmack's philosophy: "Get it working first, understand the problem sp
 - [x] Test with Ollama not running to verify error handling
 - [x] Test with network timeout by setting very low timeout value
 - [x] Test with large response (>100 lines) to verify performance
-- [ ] Test cursor position after response insertion
-- [ ] Test undo behavior - single undo should remove entire response
+- [x] Test cursor position after response insertion
+- [x] Test undo behavior - single undo should remove entire response
 
 ### Edge Cases
-- [ ] Handle malformed JSON response from Ollama gracefully
-- [ ] Test with selection at end of file (no trailing newline)
-- [ ] Verify blockquote formatting preserves empty lines in response
-- [ ] Test rapid successive queries to ensure no race conditions
-- [ ] Verify memory cleanup - no leaked job processes
+- [x] Handle malformed JSON response from Ollama gracefully
+- [x] Test with selection at end of file (no trailing newline)
+- [x] Verify blockquote formatting preserves empty lines in response
+- [x] Test rapid successive queries to ensure no race conditions
+- [x] Verify memory cleanup - no leaked job processes
 
 ## Phase 3: Documentation
 
 ### Code Documentation
-- [ ] Add module-level comment explaining purpose and Ollama dependency
-- [ ] Document config options in setup function with types and defaults
-- [ ] Add usage example in comment block showing visual selection workflow
-- [ ] Include troubleshooting note about curl requirement
+- [x] Add module-level comment explaining purpose and Ollama dependency
+- [x] Document config options in setup function with types and defaults
+- [x] Add usage example in comment block showing visual selection workflow
+- [x] Include troubleshooting note about curl requirement
 
 ### User Documentation
-- [ ] Add section to README.md under "Features" describing LLM integration
-- [ ] Include configuration example showing all available options
-- [ ] Document required Ollama setup with link to installation guide
+- [x] Add section to README.md under "Features" describing LLM integration
+- [x] Include configuration example showing all available options
+- [x] Document required Ollama setup with link to installation guide
 - [ ] Add GIF/screenshot showing feature in action (optional, only if requested)
 
 ## Future Iterations (Based on Real Usage)
