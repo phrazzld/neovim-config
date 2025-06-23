@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd("User", {
         vim.defer_fn(function()
             pcall(function() require("user.lsp").setup() end)
             pcall(function() require("user.autocmds").setup() end)
+            pcall(function() require("user.llm").setup() end)
         end, 100)
         
         vim.defer_fn(function()
