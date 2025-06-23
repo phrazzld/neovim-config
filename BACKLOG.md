@@ -1,3 +1,0 @@
-# BACKLOG
-
-All tasks completed!
