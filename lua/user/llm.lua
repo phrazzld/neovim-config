@@ -67,12 +67,6 @@ M.config = {
 }
 
 local function get_visual_selection()
-	-- Verify we're actually in visual mode to prevent stale selection leakage
-	local mode = vim.fn.mode()
-	if mode ~= 'v' and mode ~= 'V' and mode ~= '\22' then -- v, V, and CTRL-V
-		return ""
-	end
-	
 	local start_pos = vim.fn.getpos("'<")
 	local end_pos = vim.fn.getpos("'>")
 	
@@ -183,9 +177,10 @@ local function handle_query(args)
 	-- Display progress notification
 	vim.notify("Querying LLM...", vim.log.levels.INFO)
 	
-	-- Capture buffer and set persistent mark for async safety
+	-- Capture buffer and set persistent extmark for async safety
 	local bufnr = vim.api.nvim_get_current_buf()
-	vim.api.nvim_buf_set_mark(bufnr, 'L', vim.fn.line("'>"), 0, {})
+	local ns_id = vim.api.nvim_create_namespace("llm_plugin")
+	local mark_id = vim.api.nvim_buf_set_extmark(bufnr, ns_id, vim.fn.line("'>") - 1, 0, {})
 	
 	-- Make LLM request with callback
 	query_llm(selection, function(response)
@@ -196,9 +191,14 @@ local function handle_query(args)
 				return
 			end
 			
-			-- Resolve mark position at insertion time
-			local mark_pos = vim.api.nvim_buf_get_mark(bufnr, 'L')
-			local insert_line = mark_pos[1]
+			-- Resolve extmark position at insertion time and clean up
+			local mark_pos = vim.api.nvim_buf_get_extmark_by_id(bufnr, ns_id, mark_id, {})
+			if not mark_pos then
+				vim.notify("Mark lost during query", vim.log.levels.WARN)
+				return
+			end
+			vim.api.nvim_buf_del_extmark(bufnr, ns_id, mark_id)
+			local insert_line = mark_pos[1] + 1
 			
 			insert_response(bufnr, response, insert_line)
 			vim.notify("Response received", vim.log.levels.INFO)

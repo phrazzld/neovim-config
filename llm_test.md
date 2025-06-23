@@ -18,15 +18,6 @@ def calculate_sum(a, b):
 
 The function above is a simple example of how to add two numbers in Python.
 
-> Okay, that's a great, clear description of the provided Python function. You've correctly identified its key features:
->
-> *   **Takes two parameters:** `a` and `b`.
-> *   **Performs a calculation:** Addition (`a + b`).
-> *   **Returns a result:** The calculated sum.
->
-> The docstring ("Calculate the sum of two numbers.") also effectively explains the function's purpose.  It's a well-written and concise description of the function's functionality.
->
-
 ---
 
 ## Empty Selection Test Cases:
@@ -476,7 +467,7 @@ Another line: Error testing content
 
 **Enhanced Error Handling Validated:**
 - **JSON parsing safety**: `pcall` prevents crashes on malformed JSON
-- **Ollama error integration**: Properly extracts and displays Ollama's error messages  
+- **Ollama error integration**: Properly extracts and displays Ollama's error messages
 - **Comprehensive coverage**: Handles empty responses, missing fields, and malformed data
 - **User experience**: Clear, specific error messages help users understand issues
 
@@ -492,11 +483,11 @@ Another line: Error testing content
    ```vim
    :e /tmp/eof_test.md
    ```
-   
+
 2. **Add content without final newline**:
    ```
    # Test File
-   
+
    This is line 1
    This is line 2
    Final line with no newline after this text
@@ -559,7 +550,7 @@ Final line: Select this text for EOF testing
 
 1. **Craft prompt for empty lines**:
    Select this prompt designed to generate response with empty lines:
-   
+
    "Please explain the concept of programming functions in exactly this format: Start with a definition paragraph, then add a blank line, then provide a simple example, then add another blank line, then end with a summary paragraph. Make sure to include the blank lines in your response."
 
 2. **Execute test**:
@@ -618,7 +609,7 @@ Create predictable test content with distinguishable prompts:
 
 ```
 Test A: What is 1+1?
-Test B: What is 2+2?  
+Test B: What is 2+2?
 Test C: What is 3+3?
 Test D: What is 4+4?
 Test E: What is 5+5?
@@ -642,7 +633,7 @@ Test E: What is 5+5?
 
 1. **Query sequence**:
    - Select "What is 1+1?" → Press `<leader>ll`
-   - Immediately select "What is 3+3?" → Press `<leader>ll`  
+   - Immediately select "What is 3+3?" → Press `<leader>ll`
    - Immediately select "What is 5+5?" → Press `<leader>ll`
 
 2. **Expected behavior**:
@@ -701,7 +692,7 @@ ps aux | grep curl | wc -l
 
 ### Expected Behaviors:
 - **Data integrity**: Each response appears with correct prompt
-- **Location accuracy**: Responses insert at intended buffer locations  
+- **Location accuracy**: Responses insert at intended buffer locations
 - **No corruption**: Buffer content remains clean and properly formatted
 - **Resource cleanup**: No leaked curl processes or job accumulation
 - **Graceful handling**: Multiple rapid queries don't crash or corrupt state
@@ -729,7 +720,7 @@ ps aux | grep curl | wc -l
 **System processes (pre-test):**
 ```
 phaedrus 51326 /Applications/Ollama.app/Contents/Resources/ollama serve
-phaedrus 35351 /Applications/Ollama.app/Contents/Resources/ollama runner --model... 
+phaedrus 35351 /Applications/Ollama.app/Contents/Resources/ollama runner --model...
 ```
 *Baseline: 2 ollama processes, 0 curl processes*
 
