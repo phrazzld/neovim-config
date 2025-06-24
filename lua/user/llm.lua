@@ -113,7 +113,7 @@ local function get_full_buffer_content()
 	return table.concat(lines, '\n')
 end
 
-local function build_full_context_prompt(selection, full_content)
+local function build_full_context_prompt(full_content, selection)
 	return string.format("File context:\n%s\n\nSpecific question about the highlighted text:\n%s", 
 		full_content, selection)
 end
@@ -132,13 +132,14 @@ local function query_llm(prompt, callback)
 		'curl', '-s', '-X', 'POST',
 		M.config.url .. '/api/generate',
 		'-H', 'Content-Type: application/json',
-		'-d', json_payload,
+		'--data-binary', '@-',
 		'--max-time', tostring(M.config.timeout / 1000),
 		'--connect-timeout', '10'
 	}
 	
 	-- Start job with async handlers
 	local job_id = vim.fn.jobstart(curl_cmd, {
+		stdin = json_payload,
 		on_stdout = function(_, data, _)
 			vim.list_extend(response_data, data)
 		end,
@@ -200,7 +201,7 @@ local function handle_query(args)
 	
 	-- Get full file content for context
 	local full_content = get_full_buffer_content()
-	local context_prompt = build_full_context_prompt(selection, full_content)
+	local context_prompt = build_full_context_prompt(full_content, selection)
 	
 	-- Display progress notification
 	vim.notify("Querying LLM...", vim.log.levels.INFO)
