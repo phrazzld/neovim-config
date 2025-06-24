@@ -1,7 +1,8 @@
 --[[
 Neovim Inline LLM Integration
 
-Allows querying local LLM models directly from visual selections.
+Allows querying local LLM models with full file context. The entire file content
+is sent as context, with your visual selection as the specific question.
 Select text in visual mode, press <leader>ll, and receive blockquoted responses
 inserted directly into the buffer.
 
@@ -11,21 +12,29 @@ Requirements:
 - Ollama model pulled (e.g., ollama pull gemma3:4b)
 
 Usage:
-1. Select text in visual mode
+1. Select text in visual mode (your specific question/request)
 2. Press <leader>ll or run :LLMQuery
 3. Response appears as blockquoted text after selection
 
+How it works:
+- The LLM receives the entire file content as context
+- Your selected text is presented as the specific question
+- This allows the LLM to understand the broader context when answering
+
 Example workflow:
-  Before:
-    This is my code that needs explanation:
+  Before (in a large file with multiple functions):
     function add(a, b) { return a + b; }
+    function multiply(a, b) { return a * b; }
+    // Selected text: "explain this function"
     
-  After selecting the function and pressing <leader>ll:
-    This is my code that needs explanation:
+  After selecting "explain this function" and pressing <leader>ll:
     function add(a, b) { return a + b; }
+    function multiply(a, b) { return a * b; }
+    // Selected text: "explain this function"
     
-    > This is a simple JavaScript function that takes two parameters (a and b)
-    > and returns their sum. It's a basic example of function syntax in JS.
+    > Based on the context of your file with mathematical functions, you're asking about
+    > the add() function. This is a simple JavaScript function that takes two parameters
+    > and returns their sum. It follows the same pattern as your multiply() function.
     >
     
 Visual selection workflow:
@@ -49,8 +58,8 @@ Troubleshooting:
     - Check: curl http://localhost:11434/api/tags
     - Start: ollama serve (or restart Ollama app)
   
-  • Timeout errors: Increase timeout for complex queries
-    - Example: require("user.llm").config.timeout = 60000
+  • Timeout errors: Increase timeout for very complex queries
+    - Example: require("user.llm").config.timeout = 180000
   
   • Model errors: Ensure model is downloaded
     - Example: ollama pull gemma3:4b
@@ -62,7 +71,7 @@ local M = {}
 M.config = {
 	model = "gemma3:4b",
 	url = "http://localhost:11434",
-	timeout = 30000,
+	timeout = 120000,
 	keymap = "<leader>ll"
 }
 
@@ -94,6 +103,21 @@ local function get_visual_selection()
 	return table.concat(lines, '\n')
 end
 
+local function get_full_buffer_content()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	
+	if #lines == 0 then
+		return ""
+	end
+	
+	return table.concat(lines, '\n')
+end
+
+local function build_full_context_prompt(full_content, selection)
+	return string.format("File context:\n%s\n\nSpecific question about the highlighted text:\n%s", 
+		full_content, selection)
+end
+
 local function query_llm(prompt, callback)
 	local response_data = {}
 	
@@ -108,13 +132,14 @@ local function query_llm(prompt, callback)
 		'curl', '-s', '-X', 'POST',
 		M.config.url .. '/api/generate',
 		'-H', 'Content-Type: application/json',
-		'-d', json_payload,
+		'--data-binary', '@-',
 		'--max-time', tostring(M.config.timeout / 1000),
 		'--connect-timeout', '10'
 	}
 	
 	-- Start job with async handlers
 	local job_id = vim.fn.jobstart(curl_cmd, {
+		stdin = json_payload,
 		on_stdout = function(_, data, _)
 			vim.list_extend(response_data, data)
 		end,
@@ -174,6 +199,10 @@ local function handle_query(args)
 		return
 	end
 	
+	-- Get full file content for context
+	local full_content = get_full_buffer_content()
+	local context_prompt = build_full_context_prompt(full_content, selection)
+	
 	-- Display progress notification
 	vim.notify("Querying LLM...", vim.log.levels.INFO)
 	
@@ -183,7 +212,7 @@ local function handle_query(args)
 	local mark_id = vim.api.nvim_buf_set_extmark(bufnr, ns_id, vim.fn.line("'>") - 1, 0, {})
 	
 	-- Make LLM request with callback
-	query_llm(selection, function(response)
+	query_llm(context_prompt, function(response)
 		vim.schedule(function()
 			-- Validate buffer still exists
 			if not vim.api.nvim_buf_is_valid(bufnr) then
@@ -212,14 +241,14 @@ Setup function for LLM integration
 @param opts table|nil Configuration options (optional)
 @param opts.model string Model name for Ollama (default: "gemma3:4b")
 @param opts.url string Ollama server URL (default: "http://localhost:11434")
-@param opts.timeout number Request timeout in milliseconds (default: 30000)
+@param opts.timeout number Request timeout in milliseconds (default: 120000)
 @param opts.keymap string Visual mode keymap to trigger LLM query (default: "<leader>ll")
 
 Example usage:
   require("user.llm").setup({
     model = "llama3.2:3b",
     url = "http://localhost:11434",
-    timeout = 60000,
+    timeout = 180000,
     keymap = "<leader>ai"
   })
 --]]
