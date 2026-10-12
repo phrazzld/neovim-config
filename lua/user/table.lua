@@ -5,10 +5,22 @@ local function trim(s)
 end
 
 local function split_row(line)
-	local content = line:match("^%s*|?(.-)|?%s*$")
+	local content = trim(line)
+	if content:sub(1, 1) == "|" then
+		content = content:sub(2)
+	end
 	local cells = {}
-	for cell in (content .. "|"):gmatch("(.-)|") do
-		table.insert(cells, trim(cell))
+	local start = 1
+	for i = 1, #content do
+		-- GFM table escapes apply even in code spans and after backslash runs.
+		if content:sub(i, i) == "|" and content:sub(i - 1, i - 1) ~= "\\" then
+			table.insert(cells, trim(content:sub(start, i - 1)))
+			start = i + 1
+		end
+	end
+	-- A final unescaped pipe is a border, not an extra empty cell.
+	if start <= #content or #cells == 0 then
+		table.insert(cells, trim(content:sub(start)))
 	end
 	return cells
 end

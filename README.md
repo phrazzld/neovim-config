@@ -53,6 +53,18 @@ Raw markdown with Omawrite/iA Writer typographic polish. No conceal. No newline 
 - YAML frontmatter folds closed on open so writing starts at the title. `<leader>fy` toggles it from anywhere; `za` only works on the fold line. File stays raw (no conceal)
 - Word count and cursor position in minimal statusline
 - Smart return in lists: pressing `<CR>` continues `- `, `* `, `1. `, or `> `; pressing `<CR>` on an empty item clears the bullet cleanly
+- Table formatting (`:MDTableFormat` / `<leader>mf`) preserves GFM-style escaped pipes (`\|`) inside cells, including code spans. Bare pipes remain cell separators.
+
+## Tests
+
+Run the table formatter regression tests from the repository root with Neovim:
+
+```sh
+nvim --headless -u NONE -i NONE -l tests/table.lua
+```
+
+The tests use synthetic scratch buffers without loading your config or plugins.
+
 ## Layout
 
 ```
